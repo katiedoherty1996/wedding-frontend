@@ -1,8 +1,6 @@
 <template>
   <div class="q-pa-md q-mx-auto" style="max-width: 800px">
 
-    <ComponentHeadings heading="Contact Us"/>
-
     <q-form
       @submit="onSubmit"
       @reset="onReset"
@@ -43,12 +41,10 @@
 
 <script>
 import { defineComponent } from 'vue'; 
-import ComponentHeadings from 'components/ComponentHeadings.vue';
 
 export default defineComponent({
     name: "ContactForm",
     components: {
-      ComponentHeadings,
     },
     data(){
       return{

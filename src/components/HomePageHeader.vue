@@ -1,13 +1,13 @@
 <template>
   <div class="row bg-grey-3">
-    <div class="col-md-6 col-sm-12 d-flex">
-      <div class="d-flex justify-center align-center flex-column">
-        <h2 class="p-md-4 p-3 quattrocento">{{ headerText }}</h2>
-        <p class="p-md-4 p-3 allura h2">{{ subtext }}</p>
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 flex justify-center container">
+      <div class="flex column">
+        <div class="quattrocento q-pt-lg q-pr-sm q-pl-sm" style="font-size:60px;">{{ headerText }}</div>
+        <div class="allura q-pb-lg q-pl-sm" style="font-size:30px;">{{ subtext }}</div>
       </div>
     </div>
-    <div class="col-md-6 col-sm-12">
-      <q-img class="image" :src="image" alt="Image" />
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+      <q-img style="width:100%; height:auto;" :src="image" alt="Image" />
     </div>
   </div>
 </template>

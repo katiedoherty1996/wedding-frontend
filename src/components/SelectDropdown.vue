@@ -1,12 +1,14 @@
 <template>
-    <div class="q-gutter-y-md column" style="max-width: 300px">
+    <div class="q-gutter-y-md" style="max-width: 270px">
         <q-select 
             clearable 
             filled 
-            color="teal" 
-            v-model="model" 
+            color="light-green-10" 
+            v-model="selectedCategoryId" 
             :options="options" 
-            label="Filter Cards" 
+            :label="label" 
+            option-value="optionId"
+            option-label="optionName"
         />
     </div>
 </template>
@@ -18,11 +20,21 @@ export default defineComponent({
     name: "SelectDropdown",
     data() {
         return {
-            model: ref(null),
+            selectedCategoryId: null,
         }
     },
     props: {
         options: Array,
-    }
+        label: String,
+        clearFilters: Boolean
+    },
+    watch: {
+        clearFilters(){
+            this.selectedCategoryId = null;
+        },
+        selectedCategoryId(newVal) {
+            this.$emit('categorySelected', this.selectedCategoryId);
+        },
+    },
 });
 </script>

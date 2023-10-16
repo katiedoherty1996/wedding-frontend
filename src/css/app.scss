@@ -18,9 +18,14 @@
 }
 
 /** Image sizes **/
-.image-size {
+.image-size-large-and-small-screen {
     width: 300px;
     height: 300px;
+}
+
+.image-size-medium-screen {
+    width: 220px;
+    height: 220px;
 }
 
 .overlay {
@@ -79,12 +84,13 @@
     height: 100%; /* Ensure the image takes up the full height of the slide */
     object-fit: cover; /* Control how the image fits within its container */
 }
+.container {
+    align-items: center; /* Center vertically */
+    height: 100%; /* Set the desired height for your container */
+  }
 
-.no-scroll-horizontally {
-    overflow-x: hidden; /* Prevent scrolling */
-    /* Add any other custom styles you need */
-}
 
 .q-select .q-field__append {width:fit-content}
+
 
 

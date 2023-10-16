@@ -1,30 +1,26 @@
 <template>
   <q-page>
+    <!--Homepage header-->
     <HomePageHeader 
         :headerText="headerComponent.headerText"
         :subtext="headerComponent.subtext"
         :image="headerComponent.image"
     ></HomePageHeader>
+
+    <!--Products being sold-->
     <ComponentHeadings heading="Our Products"/>
     <RowOfImages :images="images"/>
-    <div class="row">
-      <ComponentHeadings heading="Our Wedding Card Album"/>
-      <EmbeddedVideo :video="video" />
-    </div>
-    <Reviews :reviews="reviews" />
-    <ContactForm />
-    <div class="q-pa-md">
-      <div class="q-gutter-y-md column" style="max-width: 300px">
-        <q-select clearable filled color="purple-12" v-model="model" :options="options" label="Label" />
 
-        <!-- equivalent -->
-        <q-select color="orange" filled v-model="model" :options="options" label="Label">
-          <template v-if="model" v-slot:append>
-            <q-icon name="cancel" @click.stop.prevent="model = null" class="cursor-pointer" />
-          </template>
-        </q-select>
-      </div>
-    </div>
+    <!--Wedding Card Album Video-->
+    <ComponentHeadings heading="Our Wedding Card Album"/>
+    <EmbeddedVideo :video="video" />
+
+    <!--Google Reviews-->
+    <Reviews :reviews="reviews" />
+
+    <!--Contact Us Form-->
+    <ComponentHeadings heading="Contact Us"/>
+    <ContactForm />
   </q-page>
 </template>
 

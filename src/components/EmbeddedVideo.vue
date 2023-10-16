@@ -1,6 +1,6 @@
 <template>
   <div class="row q-mx-auto">
-    <div class="q-pa-md col-lg-6 col-md-6 col-sm-12">
+    <div class="q-pa-md col-lg-6 col-md-6 col-sm-12 col-xs-12">
       <q-video
         :ratio="16/9"
         :src="video"

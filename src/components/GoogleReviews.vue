@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md q-pt-lg">
     <div class="row">
       <q-carousel
           v-model="slide"
@@ -15,8 +15,8 @@
           style="height: auto; max-height: 100%;"
       >
         <q-carousel-slide v-for="(review, index) in reviews" :key="index" :name="index" class="column no-wrap flex-center">
-          <h2 class="text-center allura">Google Reviews</h2>
-          <div>
+          <div class="text-center allura" style="font-size:60px;">Google Reviews</div>
+          <div class="q-pt-sm">
               <q-icon name="star" size="35px" class="text-warning" />
               <q-icon name="star" size="35px" class="text-warning" />
               <q-icon name="star" size="35px" class="text-warning" />
