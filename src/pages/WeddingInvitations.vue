@@ -3,10 +3,10 @@
         <div class="row q-pa-md ">
             <div class="col-md-6 col-lg-6 col-12">
               <div class="row flex justify-center container">
-                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice ? 'center' : 'left'">
+                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
                   <span class="text-light-green-10 quattrocento" style="font-size:16px;">Showing {{this.filteredInvitations.length}} Cards, Page {{this.currentPage}}/{{this.numberOfPages}}</span>
                 </div>
-                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice ? 'center' : 'left'">
+                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
                     <SelectDropdown 
                         :options="priceOptions"
                         :clear-filters= "clearFiltersClicked"
@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-6 col-lg-6 col-12">
                 <div class="row flex justify-center container">
-                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice ? 'center' : 'left'">
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
                         <SelectDropdown 
                             :clear-filters= "clearFiltersClicked"
                             :options="cardOptions"
@@ -27,7 +27,7 @@
                         />
                     </div>
                     <!--section for clear filters button-->
-                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice ? 'center' : 'left'">
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
                         <q-btn color="light-green-10 " icon="close" label="Clear All Filters" @click="clearFilters" />
                     </div>
                 </div>
@@ -41,6 +41,7 @@
             v-if="!isMobileDevice"
             :products="filteredInvitations"  
             :currentPage="currentPage"
+            :numberOfPages="numberOfPages"
             @page-changed="handlePageChanged"
             class="absolute-bottom top-100"
         />
@@ -63,279 +64,6 @@ export default defineComponent({
     data(){
         return {
             invitations: [
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Floral Invitation',
-                  price: 10.00,
-                  pageNo: null,
-                  categoryId: 1
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Tri-Fold Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 1
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Floral Rose Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 2
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Elegant Mangolia invitation',
-                  price: 60.00,
-                  pageNo: null,
-                  categoryId: 4
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Rustic Invitation',
-                  price: 10.00,
-                  pageNo: null,
-                  categoryId: 3
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Rustic Invitation',
-                  price: 10.00,
-                  pageNo: null,
-                  categoryId: 3
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Rustic Invitation',
-                  price: 10.00,
-                  pageNo: null,
-                  categoryId: 3
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Rustic Invitation',
-                  price: 10.00,
-                  pageNo: null,
-                  categoryId: 3
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Rustic Invitation',
-                  price: 10.00,
-                  pageNo: null,
-                  categoryId: 3
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Floral Invitation',
-                  price: 10.00,
-                  pageNo: null,
-                  categoryId: 1
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Elegant Mangolia invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 4
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Tri-Fold Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 1
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 7
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 4
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite4.jpg',
-                  invitationName: 'Lace Invitation With Wax Seal',
-                  price: 5.00,
-                  pageNo: null,
-                  categoryId: 1 
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 5
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 7
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 4
-                },
-                {
-                  image:'/images/weddinginvite2.jpg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
                 {
                   image:'/images/weddinginvite2.jpg',
                   invitationName: 'Gold Foil Invitation',
@@ -405,8 +133,8 @@ export default defineComponent({
               }
             ],
             isMobileDevice: isMobileDevice(),
+            isIpadDevice: isIpadDevice(),
             clearFiltersClicked: false,
-            numberOfPages: 0,
         }
     },
     watch: {
@@ -442,6 +170,15 @@ export default defineComponent({
             } else {
                 return this.invitations;
             }
+        },
+        numberOfPages(){
+            var numberOfInvitations = this.invitations.length;
+            let divisibleNumber = isIpadDevice() ? 15 : 20
+            const timesDivisibleByTen  = Math.floor(numberOfInvitations/divisibleNumber);
+            const remainder = numberOfInvitations % divisibleNumber;
+            var numberOfPages = timesDivisibleByTen + (remainder > 0 ? 1 : 0);
+
+            return numberOfPages;
         },
       
     },
@@ -485,9 +222,5 @@ export default defineComponent({
         this.clearFiltersClicked = true;
       }
     },
-
-    numberOfPages(numberOfPages){
-      this.numberOfPages = numberOfPages;
-    }
 });
 </script>

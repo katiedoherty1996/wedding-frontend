@@ -1,12 +1,15 @@
 <template>
-    <div class="q-pa-md flex wrap" :class="screenSize == 'sm' ? 'q-gutter-md' : ''">
+    <div class="q-pa-lg row">
         <div
             v-for="(item, index) in displayedInvitations"
             :key="index"
-            class="col-sm-12 p-3"
-            :style="cardsOnEachRow"
+            class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-md"
         >
-            <q-card class="my-card cursor" style="height: 100%;">
+            <q-card 
+                class="my-card cursor" 
+                style="height: 100%;"
+                @click="openDialog"
+            >
                 <img :src="item.image">
 
                 <q-card-section>
@@ -18,14 +21,25 @@
                 </q-card-section>
             </q-card>
         </div>
+        <card-details 
+            :dialogVisible="isDialogVisible" 
+            @close-dialog="closeDialog"
+        />
     </div>
 </template>
 
 <script>
+    import CardDetails from 'src/components/CardDetails.vue';
+    import { ref } from 'vue'
+
     export default {
+        components: {
+            CardDetails,
+        },
         data() {
             return {
-                screenSize: 'md', 
+                showModal: false,
+                screenSize: 'sm',
             };
         },
         props: {
@@ -42,16 +56,6 @@
                     return this.products.filter(invitation => invitation.pageNo == this.currentPage);
                 }
             },
-
-            cardsOnEachRow(){
-                if(isMobileDevice()){
-                    return 'width:100%;'
-                } else if(isIpadDevice()){
-                    return 'flex: 0 0 calc(33% - 10px); margin: 5px;';
-                } else{
-                    return 'flex: 0 0 calc(25% - 10px); margin: 5px;';
-                }
-            }
         },
         methods: {
             handleResize() {
@@ -62,7 +66,6 @@
                     this.screenSize = 'md'; // Medium or larger screens
                 }
             },
-
             addPageNoId() {
                 let count = 0;
                 let pageNo = 1;
@@ -83,6 +86,12 @@
                     }
                 });
             },
+            openModal(index) {
+                // Set the clicked card's modal state to true
+                this.showModal[index] = true;
+                console.log(this.showModal);
+                console.log(this.showModal[index]);
+            },
         },
         mounted() {
             // Call the checkScreenSize method when the component is mounted
@@ -95,5 +104,23 @@
             // Remove the window resize event listener when the component is destroyed
             window.removeEventListener('resize', this.checkScreenSize);
         },
+        setup() {
+            const isDialogVisible = ref(false);
+
+            const openDialog = () => {
+                isDialogVisible.value = true;
+            };
+
+            const closeDialog = () => {
+                isDialogVisible.value = false;
+            };
+
+            return {
+                isDialogVisible,
+                openDialog,
+                closeDialog,
+            };
+        },
+
     }
 </script>
