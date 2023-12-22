@@ -92,5 +92,24 @@
 
 .q-select .q-field__append {width:fit-content}
 
+/** Class to stick an element on the bottom of a modal */
+.stickyElementBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  @media screen and (max-width: 830px) {
+    .stickyElementBottom {
+      position: static;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-right: 12px; /* Adjust padding as needed */
+      padding-bottom: 12px; /* Adjust padding as needed */
+    }
+  }
+
 
 

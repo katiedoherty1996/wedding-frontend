@@ -29,6 +29,20 @@ const routes = [
     ]
   },
 
+  // card details
+  {
+    path: '/carddetails',
+
+    component: () => import('layouts/InvitationDetails.vue'),
+
+    children: [
+      {
+        path: '',
+        component: () => import('pages/CardDetails.vue')
+      }
+    ]
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {

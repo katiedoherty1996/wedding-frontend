@@ -16,6 +16,13 @@
 
       <q-input
         filled
+        v-model="subject"
+        disable
+        lazy-rules
+      />
+
+      <q-input
+        filled
         v-model="email"
         label="Your email *"
         lazy-rules
@@ -49,6 +56,7 @@ export default defineComponent({
     data(){
       return{
         email: '',
+        subject: 'Subject: Card Number',
         name: '',
         text: ''
       }

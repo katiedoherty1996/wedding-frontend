@@ -1,57 +1,90 @@
 <template>
     <div class="q-pa-md q-gutter-sm">
         <q-dialog v-model="computedDialogVisible" @click="closeDialog">
-            <q-card class="my-card">
-                <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
+            <q-card class="my-card" style="width: 3000px; position: relative; max-width: 180vh;">
+                <div class="absolute-top-right cursor q-card-close q-pr-md q-pt-sm" @click="closeDialog">X</div>
+                <div class="q-mt-md row">
+                    <div class="col-md-6 col-12">
+                        <CarouselImages />
+                    </div>
 
-                <q-card-section>
-                    <q-btn
-                        fab
-                        color="primary"
-                        icon="place"
-                        class="absolute"
-                        style="top: 0; right: 12px; transform: translateY(-50%);"
-                    />
+                    <!--Cards information-->
+                    <div class="col-md-6 col-12">
+                        <q-card-section>
+                            <div class="row no-wrap items-center">
+                                <div class="col text-h6 ellipsis">
+                                    Wedding Card Name 
+                                </div>
+                            </div>
+                        </q-card-section>
 
-                    <div class="row no-wrap items-center">
-                        <div class="col text-h6 ellipsis">
-                            Cafe Basilico
+                        <q-card-section class="q-pt-none">
+                            <div class="text-subtitle1">
+                                €3.50 each
+                            </div>
+                            <div class="text-caption">
+                                This is the description for the wedding card that the user clicked on.
+                            </div>
+                        </q-card-section>
+
+                        <q-separator />
+
+                        <!--input for number of cards and the calculation for prices-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <q-card-section class="q-pt-none q-mt-sm">
+                                    <div class="text-subtitle1">
+                                        Enter Number Of Cards
+                                    </div>
+                                    <div>
+                                        <q-input
+                                            label="Number of cards"
+                                            type="number"
+                                            filled
+                                            style="max-width: 200px;"
+                                        />
+                                    </div>
+                                </q-card-section>
+                            </div>
+                            <div class="col-md-6">
+                                <q-card-section class="q-pt-none q-mt-sm hidden">
+                                    <div class="text-subtitle1">
+                                        Number Of Cards: 10
+                                    </div>
+                                    <div class="text-subtitle1">
+                                        Total Price: €70
+                                    </div>
+                                    <div class="text-caption">
+                                        €3.50 each
+                                    </div>
+                                </q-card-section>
+                            </div>
                         </div>
-                        <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
-                            <q-icon name="place" />
-                            250 ft
-                        </div>
+
+                        <q-separator />
+
+                        <!--buttons-->
+                        <q-card-actions class="q-pa-md">
+                            <q-btn v-close-popup color="primary" label="Calculate Price" icon="reply" class="q-btn-sm q-mb-sm" />
+                            <q-btn v-close-popup color="primary" label="Add To Basket" icon="check" class="q-btn-sm q-mb-sm" />
+                            <q-btn v-close-popup color="primary" label="Enquire" icon="reply" class="q-btn-sm q-mb-sm" />
+                            <q-btn v-close-popup color="primary" label="Book An Appointment" icon="event" class="q-btn-sm q-mb-sm" />
+                        </q-card-actions>
                     </div>
-
-                    <q-rating v-model="stars" :max="5" size="32px" />
-                </q-card-section>
-
-                <q-card-section class="q-pt-none">
-                    <div class="text-subtitle1">
-                        $・Italian, Cafe
-                    </div>
-                    <div class="text-caption text-grey">
-                        Small plates, salads & sandwiches in an intimate setting.
-                    </div>
-                </q-card-section>
-
-                <q-separator />
-
-                <q-card-actions align="right">
-                    <q-btn v-close-popup flat color="primary" label="Reserve" />
-                    <q-btn v-close-popup flat color="primary" round icon="event" />
-                </q-card-actions>
-
-                <q-btn @click="closeDialog">Close</q-btn>
+                </div>
             </q-card>
         </q-dialog>
     </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import CarouselImages from 'components/CarouselImages.vue';
 
 export default {
+    components: {
+        CarouselImages,
+    },
     data(){
         return {
         }
@@ -78,14 +111,14 @@ export default {
     },
     setup () {
         return {
-        slide: ref(1),
-        lorem: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus, ratione eum minus fuga, quasi dicta facilis corporis magnam, suscipit at quo nostrum!',
+            slide: ref(1),
+            lorem: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus, ratione eum minus fuga, quasi dicta facilis corporis magnam, suscipit at quo nostrum!',
 
-        stars: ref(3),
+            stars: ref(3),
 
-        slideVol: ref(39),
-        slideAlarm: ref(56),
-        slideVibration: ref(63)
+            slideVol: ref(39),
+            slideAlarm: ref(56),
+            slideVibration: ref(63)
         }
     }
 }
