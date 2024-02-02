@@ -65,21 +65,21 @@ export default defineComponent({
         return {
             invitations: [
                 {
-                  image:'/images/weddinginvite2.jpg',
+                  image:'/images/weddinginvite8.jpeg',
                   invitationName: 'Gold Foil Invitation',
                   price: 9.00,
                   pageNo: null,
                   categoryId: 6
                 },
                 {
-                  image:'/images/weddinginvite2.jpg',
+                  image:'/images/weddinginvite10.jpeg',
                   invitationName: 'Gold Foil Invitation',
                   price: 9.00,
                   pageNo: null,
                   categoryId: 6
                 },
                 {
-                  image:'/images/weddinginvite2.jpg',
+                  image:'/images/weddinginvite9.jpeg',
                   invitationName: 'Gold Foil Invitation',
                   price: 9.00,
                   pageNo: null,
