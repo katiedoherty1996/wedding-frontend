@@ -8,7 +8,7 @@
             <q-card 
                 class="my-card cursor" 
                 style="height: 100%;"
-                @click="openDialog"
+                @click="openCardDetails(item.id)"
             >
                 <img :src="item.image">
 
@@ -21,21 +21,11 @@
                 </q-card-section>
             </q-card>
         </div>
-        <card-details 
-            :dialogVisible="isDialogVisible" 
-            @close-dialog="closeDialog"
-        />
     </div>
 </template>
 
 <script>
-    import CardDetails from 'src/components/CardDetails.vue';
-    import { ref } from 'vue'
-
     export default {
-        components: {
-            CardDetails,
-        },
         data() {
             return {
                 showModal: false,
@@ -58,6 +48,10 @@
             },
         },
         methods: {
+             openCardDetails(cardId) {
+                // Use Vue Router to navigate to the card details page
+                this.$router.push({ path: '/carddetails', query: { id: cardId } });
+            },
             handleResize() {
                 // Update the screenSize data property based on the window width
                 if (window.innerWidth < 600) {
@@ -103,23 +97,6 @@
         beforeUnmount() {
             // Remove the window resize event listener when the component is destroyed
             window.removeEventListener('resize', this.checkScreenSize);
-        },
-        setup() {
-            const isDialogVisible = ref(false);
-
-            const openDialog = () => {
-                isDialogVisible.value = true;
-            };
-
-            const closeDialog = () => {
-                isDialogVisible.value = false;
-            };
-
-            return {
-                isDialogVisible,
-                openDialog,
-                closeDialog,
-            };
         },
 
     }

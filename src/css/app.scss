@@ -44,7 +44,7 @@
 }
 
 .image-container:hover .overlay {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .cursor {
@@ -64,7 +64,15 @@
     background-color: #6b7d73;
 }
 
+.teal-custom-colour-text {
+    color: #6b7d73;
+}
+
 /**Font Size*/
+.f-40 {
+    font-size: 40px;
+}
+
 .f-30 {
     font-size: 30px;
 }
@@ -87,7 +95,19 @@
 .container {
     align-items: center; /* Center vertically */
     height: 100%; /* Set the desired height for your container */
-  }
+}
+
+.with-vertical-line {
+    position: relative;
+}
+
+.vertical-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 1px solid #ccc;
+}
 
 
 .q-select .q-field__append {width:fit-content}

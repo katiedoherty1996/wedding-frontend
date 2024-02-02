@@ -11,6 +11,10 @@ const routes = [
       {
         path: '/weddinginvitations',
         component: () => import('pages/WeddingInvitations.vue')
+      },
+      {
+        path: '/carddetails',
+        component: () => import('pages/CardDetails.vue')
       }
     ]
   },
