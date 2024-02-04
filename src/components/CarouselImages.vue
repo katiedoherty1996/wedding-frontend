@@ -6,10 +6,11 @@
                     swipeable
                     animated
                     v-model="slide"
-                    height=750px
+                    height=450px
                     control-text-color=white
                     arrows
                     infinite
+                    style="width: 80%; max-width: 1200px; margin: 0 auto;" 
                 >
                     <q-carousel-slide :name="1" img-src="/images/weddinginvite9.jpeg" />
                     <q-carousel-slide :name="2" img-src="/images/weddinginvite7.jpeg" />

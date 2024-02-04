@@ -67,14 +67,14 @@ export default defineComponent({
                 {
                   image:'/images/weddinginvite8.jpeg',
                   invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
+                  price: 6.00,
                   pageNo: null,
                   categoryId: 6
                 },
                 {
                   image:'/images/weddinginvite10.jpeg',
                   invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
+                  price: 10.00,
                   pageNo: null,
                   categoryId: 6
                 },
