@@ -11,7 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title class="cursor" @click="redirectToHash">
+        <q-toolbar-title class="cursor quattrocento" @click="redirectToHash">
           Doherty Wedding Invitations
         </q-toolbar-title>
       </q-toolbar>

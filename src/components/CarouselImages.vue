@@ -6,7 +6,7 @@
                     swipeable
                     animated
                     v-model="slide"
-                    height=450px
+                    height=650px
                     control-text-color=white
                     arrows
                     infinite
@@ -67,7 +67,8 @@ export default {
         handleImageKeyUpdate(key) {
             // Handling the data received from the child component
             this.imageKey = key;
-            console.log('imagekey', this.imageKey)
+            var productIndex = this.products.findIndex(product => product.key == this.imageKey);
+            this.slide = ref(productIndex);
         }
 
     },

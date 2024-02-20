@@ -15,6 +15,7 @@
 
 .quattrocento {
     font-family: 'Quattrocento Sans', sans-serif;
+    font-weight: 400;
 }
 
 /** Image sizes **/
@@ -56,6 +57,10 @@
     color: white;
 }
 
+.backgroundWhite {
+    background-color: white;
+}
+
 .black {
     color: black;
 }
@@ -65,12 +70,28 @@
 }
 
 .teal-custom-colour-text {
-    color: #6b7d73;
+    color: #417759;
+}
+
+.pine {
+    background-color: #417759;
+}
+
+.grey-text-colour {
+    color: #7aa38b;
+}
+
+.grey-background {
+    background-color: #f0efef;
 }
 
 /**Font Size*/
 .f-40 {
     font-size: 40px;
+}
+
+.f-55 {
+    font-size: 55px;
 }
 
 .f-30 {
@@ -80,6 +101,14 @@
 .f-20 {
     font-size: 20px;
 }
+
+/** Background Element **/
+.background-element {
+    background-image: url('images/flower-background.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+}
+
 
 /**Carousel*/
 .carousel-size {
@@ -96,19 +125,6 @@
     align-items: center; /* Center vertically */
     height: 100%; /* Set the desired height for your container */
 }
-
-.with-vertical-line {
-    position: relative;
-}
-
-.vertical-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    border-left: 1px solid #ccc;
-}
-
 
 .q-select .q-field__append {width:fit-content}
 

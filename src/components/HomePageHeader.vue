@@ -1,35 +1,35 @@
 <template>
-  <div class="row bg-grey-3">
-    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 flex justify-center container">
-      <div class="flex column">
-        <div class="quattrocento q-pt-lg q-pr-sm q-pl-sm" style="font-size:60px;">{{ headerText }}</div>
-        <div class="allura q-pb-lg q-pl-sm" style="font-size:30px;">{{ subtext }}</div>
-      </div>
+    <div class="row bg-grey-3">
+        <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 flex justify-center container">
+            <div class="flex column">
+                <div class="quattrocento q-pt-lg q-pr-sm q-pl-sm" style="font-size:60px;">{{ headerText }}</div>
+                <div class="allura q-pb-lg q-pl-sm" style="font-size:30px;">{{ subtext }}</div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+            <q-img style="width:100%; height:auto;" :src="image" alt="Image" />
+        </div>
     </div>
-    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
-      <q-img style="width:100%; height:auto;" :src="image" alt="Image" />
-    </div>
-  </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'; 
 
 export default defineComponent({
-  name: 'HomePageHeader',
-  props: {
-    headerText: {
-      type: String,
-      required: true,
+    name: 'HomePageHeader',
+    props: {
+        headerText: {
+          type: String,
+          required: true,
+        },
+        subtext: {
+          type: String,
+          required: true,
+        },
+        image: {
+          type: String,
+          required: true,
+        },
     },
-    subtext: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
-  },
 });
 </script>

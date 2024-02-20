@@ -18,10 +18,10 @@
                         :key="product.key" 
                         class="col-4 full-height" 
                         :src="product.image" 
-                        :style="{ border: product.key === imageKey2 ? '4px solid teal' : '' }" 
+                        :style="{ border: product.key === imageKey2 ? '5px solid #417759' : '' }" 
                         style="cursor:pointer;" 
                         @click="setImageKey(product.key)"
-                        />
+                    />
                 </div>
             </q-carousel-slide>
         </q-carousel>
@@ -54,7 +54,6 @@ export default {
     },
     watch: {
         imageKey() {
-            console.log('Image key changed:', this.imageKey);
             this.imageKey2 = this.imageKey;
             // Handle imageKey change as needed
         }

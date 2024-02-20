@@ -1,6 +1,6 @@
 <template>
     <q-page class="q-h-screen flex-center">
-        <div class="row q-pa-md ">
+        <div class="row q-pa-md backgroundWhite">
             <div class="col-md-6 col-lg-6 col-12">
               <div class="row flex justify-center container">
                 <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
@@ -64,6 +64,69 @@ export default defineComponent({
     data(){
         return {
             invitations: [
+                {
+                  image:'/images/weddinginvite9.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
+                {
+                  image:'/images/weddinginvite7.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
+                {
+                  image:'/images/weddinginvite10.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
+                {
+                  image:'/images/weddinginvite9.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
+                {
+                  image:'/images/weddinginvite7.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
+                {
+                  image:'/images/weddinginvite10.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
+                {
+                  image:'/images/weddinginvite9.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
+                {
+                  image:'/images/weddinginvite7.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
+                {
+                  image:'/images/weddinginvite10.jpeg',
+                  invitationName: 'Gold Foil Invitation',
+                  price: 9.00,
+                  pageNo: null,
+                  categoryId: 6
+                },
                 {
                   image:'/images/weddinginvite9.jpeg',
                   invitationName: 'Gold Foil Invitation',

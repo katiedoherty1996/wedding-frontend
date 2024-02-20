@@ -1,49 +1,42 @@
 <template>
-    <q-page>
-        <div>
-            <div class="row">
-                <div class="col-md-6 col-12 with-vertical-line">
-                    <CarouselImages 
-                        :products="products"
-                    />
-                </div>
+    <q-page class="q-gutter-lg background-element ">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <CarouselImages 
+                    :products="products"
+                />
+            </div>
 
-                <!-- Vertical line -->
-                <div class="vertical-line"></div>
-
-                <!--Cards information-->
-                <div class="col-md-6 col-12">
-                    <q-card-section>
-                        <div class="row no-wrap items-center">
-                            <div class="col text-h2 ellipsis">
-                                Wedding Card Name
+            <!--Cards information-->
+            <div class="col-md-6 col-12 q-pl-lg">
+                <q-card-section class="">
+                    <div class="row no-wrap items-center">
+                        <div class="col">
+                            <div class="f-55 quattrocento teal-custom-colour-text">
+                                <b>Elegant Wedding Card</b>
+                            </div>
+                            <div class=" grey-text-colour">
+                                <span class="f-30 teal-custom-colour-text">€3.50 each</span>
                             </div>
                         </div>
-                    </q-card-section>
+                    </div>
+                </q-card-section>
 
-                    <q-card-section class="q-pt-none">
-                        <div class="f-40">
-                            €3.50 each
-                        </div>
-                        <div class="text-caption">
-                            This is the description for the wedding card that the user clicked on.
-                        </div>
-                    </q-card-section>
+                <q-separator />
 
-                    <q-separator />
-
-                    <!--buttons-->
-                    <q-card-actions class="q-pa-md">
-                        <q-btn 
-                            v-close-popup 
-                            label="Contact Us About This Card" 
-                            color="light-green-10" 
-                            icon="check" 
-                            class="q-btn-sm q-mb-sm white" 
-                        />
-                    </q-card-actions>
+                <div class="row">
+                    <div class="col-12">
+                        <!--place an order for cards -->
+                        <q-card-section>
+                            <PlaceOrderForm />
+                        </q-card-section>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
+            <ExtraCardDetails />
         </div>
     </q-page>
 </template>
@@ -51,10 +44,14 @@
 <script>
 import { ref } from 'vue';
 import CarouselImages from 'components/CarouselImages.vue';
+import PlaceOrderForm from 'components/PlaceOrderForm.vue';
+import ExtraCardDetails from 'components/ExtraCardDetails.vue';
 
 export default {
     components: {
         CarouselImages,
+        PlaceOrderForm,
+        ExtraCardDetails,
     },
     data(){
         return {

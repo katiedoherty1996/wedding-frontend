@@ -83,8 +83,6 @@
             openModal(index) {
                 // Set the clicked card's modal state to true
                 this.showModal[index] = true;
-                console.log(this.showModal);
-                console.log(this.showModal[index]);
             },
         },
         mounted() {
