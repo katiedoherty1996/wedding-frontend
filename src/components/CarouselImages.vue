@@ -10,18 +10,20 @@
                     control-text-color=white
                     arrows
                     infinite
-                    style="width: 80%; max-width: 1200px; margin: 0 auto;" 
+                    style="width: 90%; max-width: 1300px; margin: 0 auto;" 
+                    @transition="handleSlideChange"
                 >
-                    <q-carousel-slide :name="1" img-src="/images/weddinginvite9.jpeg" />
-                    <q-carousel-slide :name="2" img-src="/images/weddinginvite7.jpeg" />
-                    <q-carousel-slide :name="3" img-src="/images/weddinginvite6.jpeg" />
-                    <q-carousel-slide :name="4" img-src="/images/weddinginvite10.jpeg" />
+                    <q-carousel-slide v-for="(product, index) in products" :key="product.key" :name="index" :img-src="product.image" />
                 </q-carousel>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <ThumbnailCarousel />
+                <ThumbnailCarousel
+                    :imageKey = "imageKey"
+                    :products = "products"
+                    @imageKeyUpdated="handleImageKeyUpdate"
+                />
             </div>
         </div>
     </div>
@@ -46,9 +48,34 @@ export default {
     components: {
         ThumbnailCarousel,
     },
+    data(){
+        return {
+            imageKey: this.products[0].key,
+        }
+    },
+    props: {
+        products: {
+            type: Array,
+            required: true
+        }
+    },
+    methods: {
+        handleSlideChange(newVal) {
+            var productObject = this.products[newVal];
+            this.imageKey = productObject.key;
+        },
+        handleImageKeyUpdate(key) {
+            // Handling the data received from the child component
+            this.imageKey = key;
+            console.log('imagekey', this.imageKey)
+        }
+
+    },
+    watch: {
+    },
     setup () {
         return {
-            slide: ref(1)
+            slide: ref(0)
         }
     }
 }

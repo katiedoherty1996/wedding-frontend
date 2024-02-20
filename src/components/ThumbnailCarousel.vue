@@ -13,16 +13,15 @@
         >
             <q-carousel-slide :name="1" class="column no-wrap">
                 <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-                    <q-img class="col-4 full-height" src="/images/weddinginvite6.jpeg" />
-                    <q-img class="col-4 full-height" src="/images/weddinginvite5.jpeg" />
-                    <q-img class="col-4 full-height" src="/images/weddinginvite8.jpeg" />
-                </div>
-            </q-carousel-slide>
-            <q-carousel-slide :name="2" class="column no-wrap">
-                <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-                    <q-img class="col-4 full-height" src="/images/weddinginvite10.jpeg" />
-                    <q-img class="col-4 full-height" src="/images/weddinginvite9.jpeg" />
-                    <q-img class="col-4 full-height" src="/images/weddinginvite8.jpeg" />
+                    <q-img 
+                        v-for="product in products" 
+                        :key="product.key" 
+                        class="col-4 full-height" 
+                        :src="product.image" 
+                        :style="{ border: product.key === imageKey2 ? '4px solid teal' : '' }" 
+                        style="cursor:pointer;" 
+                        @click="setImageKey(product.key)"
+                        />
                 </div>
             </q-carousel-slide>
         </q-carousel>
@@ -33,10 +32,38 @@
 import { ref } from 'vue'
 
 export default {
-  setup () {
-    return {
-      slide: ref(1)
-    }
-  }
+    setup () {
+        return {
+            slide: ref(1)
+        }
+    },
+    data() {
+        return {
+            imageKey2: this.products[0].key,
+        }
+    },
+    props: {
+        products: {
+            type: Array,
+            required: true
+        },
+        imageKey: {
+            type: String,
+            required: true
+        },
+    },
+    watch: {
+        imageKey() {
+            console.log('Image key changed:', this.imageKey);
+            this.imageKey2 = this.imageKey;
+            // Handle imageKey change as needed
+        }
+    },
+    methods: {
+        setImageKey(key) {
+            this.imageKey2 = key;
+            this.$emit('imageKeyUpdated', this.imageKey2);
+        },
+    },
 }
 </script>

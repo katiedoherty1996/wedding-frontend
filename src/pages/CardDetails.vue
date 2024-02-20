@@ -3,7 +3,9 @@
         <div>
             <div class="row">
                 <div class="col-md-6 col-12 with-vertical-line">
-                    <CarouselImages />
+                    <CarouselImages 
+                        :products="products"
+                    />
                 </div>
 
                 <!-- Vertical line -->
@@ -56,6 +58,29 @@ export default {
     },
     data(){
         return {
+            products: [
+                {
+                    id: 1,
+                    key: 'DWI1',
+                    image : "images/weddinginvite10.jpeg",
+                    name: 'Wedding Card 1',
+                    description: 'Gold foil wedding invitation. Trifold and exquisite'
+                },
+                {
+                    id: 4,
+                    key: 'DWI2',
+                    image : "/images/weddinginvite9.jpeg",
+                    name: 'Wedding Card 2',
+                    description: 'Gold foil wedding invitation. Trifold and exquisite'
+                },
+                {
+                    id: 3,
+                    key: 'DWI3',
+                    image : "/images/weddinginvite7.jpeg",
+                    name: 'Wedding Card 3',
+                    description: 'Gold foil wedding invitation. Trifold and exquisite'
+                },
+            ]
         }
     },
     props: {
