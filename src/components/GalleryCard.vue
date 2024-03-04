@@ -10,7 +10,9 @@
                 style="height: 100%;"
                 @click="openCardDetails(item.id)"
             >
-                <img :src="item.image">
+                <div class="image-container">
+                    <img :src="item.image" class="card-image">
+                </div>
 
                 <q-card-section>
                     <div class="text-h6">{{ item.invitationName }}</div>
@@ -23,6 +25,22 @@
         </div>
     </div>
 </template>
+
+<style>
+.image-container {
+    height: 350px; /* Adjust as needed */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+}
+</style>
 
 <script>
     export default {
