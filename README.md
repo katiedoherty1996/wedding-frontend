@@ -1,6 +1,8 @@
 # wedding app (wedding-frontend)
 
-wedding website
+This is the frontend for a wedding website, the backend is here:
+https://github.com/katiedoherty1996/wedding-backend
+It is a simple wedding cards website. This is version 1. It will have a homepage, gallery, details page and the option to email ithe service provider. I used quasar and vue to build teh frontend. It is fully responsive.
 
 ## Install the dependencies
 ```bash
@@ -11,23 +13,7 @@ npm install
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev
-```
-
-
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
+npm run dev
 ```
 
 
