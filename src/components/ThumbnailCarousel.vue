@@ -39,7 +39,7 @@ export default {
     },
     data() {
         return {
-            imageKey2: this.products[0].key,
+            imageKey2: 'DWI1',
         }
     },
     props: {

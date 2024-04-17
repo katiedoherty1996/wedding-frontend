@@ -4,6 +4,7 @@
             <div class="col-md-6 col-lg-6 col-sm-12 col-12">
                 <CarouselImages 
                     :products="products"
+                    :showSmallImages="showSmallImages"
                 />
             </div>
 
@@ -13,10 +14,10 @@
                     <div class="row no-wrap items-center">
                         <div class="col">
                             <div class="f-55 quattrocento teal-custom-colour-text">
-                                <b>Elegant Wedding Card</b>
+                                <b>{{name}}</b>
                             </div>
                             <div class=" grey-text-colour">
-                                <span class="f-30 teal-custom-colour-text">€3.50 each</span>
+                                <span class="f-30 teal-custom-colour-text">€{{price}} each</span>
                             </div>
                         </div>
                     </div>
@@ -55,6 +56,22 @@ export default {
         dialogVisible: Boolean,
         products: {
             type: Array,
+            required: true
+        },
+        showSmallImages: {
+            type: Boolean,
+            required: true
+        },
+        price: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required:true
+        },
+        name: {
+            type: String,
             required: true
         }
     },

@@ -53,6 +53,8 @@ import { defineComponent, ref } from 'vue'
 import GalleryCard from 'components/GalleryCard.vue'
 import SelectDropdown from 'components/SelectDropdown.vue'
 import PaginationNumbers from 'components/PaginationNumbers.vue'
+import { api } from 'src/boot/axios';
+import { useQuasar } from 'quasar';
 
 export default defineComponent({
     name: 'WeddingInvitations',
@@ -63,94 +65,7 @@ export default defineComponent({
     },
     data(){
         return {
-            invitations: [
-                {
-                  image:'/images/weddinginvite9.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite7.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite10.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite9.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite7.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite10.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite9.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite7.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite10.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite9.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite7.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                {
-                  image:'/images/weddinginvite10.jpeg',
-                  invitationName: 'Gold Foil Invitation',
-                  price: 9.00,
-                  pageNo: null,
-                  categoryId: 6
-                },
-                
-                
-            ],
+            invitations: [],
             selectedCategoryCard: null,
             selectedCategoryPrice: null,
             currentPage: 1,
@@ -199,6 +114,10 @@ export default defineComponent({
             isIpadDevice: isIpadDevice(),
             clearFiltersClicked: false,
         }
+    },
+    mounted() {
+        // Make AJAX call on page load
+        this.getWeddingInvitations();
     },
     watch: {
         selectedCategoryCard(){
@@ -283,6 +202,21 @@ export default defineComponent({
         this.selectedCategoryCard = null;
         this.selectedCategoryPrice = null;
         this.clearFiltersClicked = true;
+      },
+
+      getWeddingInvitations(){
+          const $q = useQuasar();
+          $q.loading.show()
+
+          api.get('/weddingcards')
+          .then(response => {
+              this.invitations = response.data;
+          })
+          .catch(error => {
+              console.error('Error fetching cards:', error);
+          }).finally(() =>{
+              $q.loading.hide()
+          });
       }
     },
 });

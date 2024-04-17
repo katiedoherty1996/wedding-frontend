@@ -1,23 +1,23 @@
 <template>
     <div>
         <div class="row flex justify-center align-center">
-            <div class="col-12 q-pa-md">
+            <div class="col-12 col-sm-12 col-xs-12 q-pa-md">
                 <q-carousel
                     swipeable
                     animated
                     v-model="slide"
-                    height=650px
                     control-text-color=white
+                    :height = "carouselHeight"
                     arrows
                     infinite
-                    style="width: 90%; max-width: 1300px; margin: 0 auto;" 
+                    style="carouselWidth" 
                     @transition="handleSlideChange"
                 >
                     <q-carousel-slide v-for="(product, index) in products" :key="product.key" :name="index" :img-src="product.image" />
                 </q-carousel>
             </div>
         </div>
-        <div class="row">
+        <div class="row" v-if="!showSmallImages">
             <div class="col-12">
                 <ThumbnailCarousel
                     :imageKey = "imageKey"
@@ -50,13 +50,25 @@ export default {
     },
     data(){
         return {
-            imageKey: this.products[0].key,
+            imageKey: 'DWI1',
         }
     },
     props: {
         products: {
             type: Array,
             required: true
+        },
+        showSmallImages: {
+            type: Boolean,
+            required: true
+        }
+    },
+    computed: {
+        carouselHeight() {
+            return window.innerWidth < 600 ? "500px" : "650px";
+        },
+        carouselWidth() {
+            return window.innerWidth < 600 ? "" : "width: 60%; max-width: 1300px; margin: 0 auto;" ;
         }
     },
     methods: {
