@@ -3,10 +3,10 @@
         <div
             v-for="(item, index) in displayedInvitations"
             :key="index"
-            class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-md"
+            class="col-12 col-sm-6 col-md-4 col-lg-4 q-pa-md"
         >
             <q-card 
-                class="my-card cursor" 
+                class="cursor" 
                 style="height: 100%;"
                 @click="openCardDetails(item.id)"
             >

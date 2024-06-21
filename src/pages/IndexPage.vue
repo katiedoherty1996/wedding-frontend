@@ -15,11 +15,19 @@
     <ComponentHeadings heading="Our Wedding Card Album"/>
     <EmbeddedVideo :video="video" />
 
+    <!--About Us Form-->
+    <ComponentHeadings heading="About Us"/>
+    <ImageAndInformation 
+        image="/images/homepage-pic.jpg"
+        text="We are a small family run business who supply elegant and affordable wedding stationary.
+        We pride ourselves on providing high-quality wedding invitations at affordable prices." 
+    />
+
     <!--Google Reviews-->
     <Reviews :reviews="reviews" />
 
     <!--Contact Us Form-->
-    <ComponentHeadings heading="Contact Us"/>
+    <ComponentHeadings heading="Contact Us" id="contactUs"/>
     <ContactForm />
   </q-page>
 </template>
@@ -32,6 +40,7 @@ import Reviews from '../components/GoogleReviews.vue';
 import ContactForm from 'components/ContactForm.vue';
 import EmbeddedVideo from 'components/EmbeddedVideo.vue';
 import ComponentHeadings from 'components/ComponentHeadings.vue';
+import ImageAndInformation from 'components/ImageAndInformation.vue';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -42,26 +51,30 @@ export default defineComponent({
     ContactForm,
     EmbeddedVideo,
     ComponentHeadings,
+    ImageAndInformation,
   },
   data(){
     return{
         headerComponent: {
           headerText: 'Doherty Wedding Invitations',
           subtext: 'Affordable Handmade Invitations',
-          image: "/images/Wedding-Blog-Header.jpg",
+          image: "images/blog-header.jpg",
         },
         images: [
           {
-            image:'/images/weddinginvite4.jpg',
-            imageText: 'Wedding Invitations'
+            image:'/images/card12.jpg',
+            imageText: 'Wedding Invitations',
+            url: '/#/weddinginvitations'
           },
           {
-            image:'/images/weddinginvite2.jpg',
-            imageText: 'Mass Booklets'
+            image:'/images/massbooklets.jpg',
+            imageText: 'Mass Booklets',
+            url: '/#/weddinginvitations'
           },
           {
-            image:'/images/weddinginvite3.jpg',
-            imageText: 'Thank You Cards'
+            image:'/images/thankyoucards.jpg',
+            imageText: 'Thank You Cards',
+            url: '/#/weddinginvitations'
           },
         ],
         reviews: [

@@ -10,6 +10,7 @@
         filled
         v-model="name"
         label="Your name *"
+        class="q-pa-md"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Please type something']"
       />

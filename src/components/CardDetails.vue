@@ -29,7 +29,10 @@
                     <div class="col-12">
                         <!--place an order for cards -->
                         <q-card-section>
-                            <PlaceOrderForm />
+                            <PlaceOrderForm
+                                :priceHighGrade = "priceHighGrade" 
+                                :priceLowGrade = "priceLowGrade"
+                            />
                         </q-card-section>
                     </div>
                 </div>
@@ -63,6 +66,14 @@ export default {
             required: true
         },
         price: {
+            type: String,
+            required: true
+        },
+        priceHighGrade: {
+            type: String,
+            required: true
+        },
+        priceLowGrade: {
             type: String,
             required: true
         },

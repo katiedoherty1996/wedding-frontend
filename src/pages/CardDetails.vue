@@ -2,6 +2,8 @@
     <CardDetails 
         :products = "products" 
         :price = "price"
+        :priceHighGrade = "priceHighGrade"
+        :priceLowGrade = "priceLowGrade"
         :description = "description"
         :name = "name"
         :showSmallImages="$q.screen.lt.sm" 
@@ -21,6 +23,8 @@ export default {
         return {
             products: [],
             price: null,
+            priceHighGrade: null,
+            priceLowGrade: null,
             description: null,
             name: null,
         }
@@ -45,11 +49,13 @@ export default {
                 }
             })
             .then(response => {
-                this.products    = response.data.images;
-                this.price       = response.data.price;
-                this.description = response.data.description;
-                this.name        = response.data.cardName;
-                console.log(response.data); // Handle the response data
+                console.log(response.data)
+                this.products       = response.data.images;
+                this.price          = response.data.price;
+                this.priceHighGrade = response.data.priceHighGrade;
+                this.priceLowGrade  = response.data.priceLowGrade;
+                this.description    = response.data.description;
+                this.name           = response.data.cardName;
             })
             .catch(error => {
                 console.error('Error:', error);
