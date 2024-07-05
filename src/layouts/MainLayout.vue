@@ -19,14 +19,15 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
+      side="left"
+      behavior="mobile"
       bordered
     >
         <q-list class="no-scroll-horizontally">
             <q-item-label
               header
             >
-              Essential Links
+              Navigation Links
             </q-item-label>
 
             <EssentialLink
@@ -39,13 +40,12 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <div class="q-pt-lg"></div>
     <FooterComponent />
   </q-layout>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref} from 'vue';
 import EssentialLink from 'components/EssentialLink.vue'
 import FooterComponent from 'src/components/FooterComponent.vue'
 
@@ -98,7 +98,6 @@ export default defineComponent({
 
   setup () {
     const leftDrawerOpen = ref(false)
-    // api.get('/card').then(response => console.log(response.data));
 
     return {
       essentialLinks: linksList,
@@ -108,6 +107,7 @@ export default defineComponent({
       }
     }
   },
+
 
   methods: {
     redirectToHash() {

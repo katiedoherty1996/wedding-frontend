@@ -7,9 +7,9 @@
             swipeable
             animated
             control-color="black"
-            padding
             arrows
             height="200px"
+            class="bg-transparent"
         >
             <q-carousel-slide :name="1" class="column no-wrap">
                 <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
@@ -18,7 +18,7 @@
                         :key="product.key" 
                         class="col-4 full-height" 
                         :src="product.image" 
-                        :style="{ border: product.key === imageKey2 ? '5px solid #417759' : '' }" 
+                        :style="{ border: product.key == imageKey2 ? '5px solid #417759' : '' }" 
                         style="cursor:pointer;" 
                         @click="setImageKey(product.key)"
                     />
@@ -51,6 +51,8 @@ export default {
             type: String,
             required: true
         },
+    },
+    mounted() {
     },
     watch: {
         imageKey() {

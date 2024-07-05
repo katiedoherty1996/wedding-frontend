@@ -1,5 +1,5 @@
 <template>
-    <q-footer elevated class="footer-background text-white q-pa-md">
+    <q-footer elevated class="footer-background text-white q-pa-lg">
         <div class="row footer-content mdi-align-horizontal-center">
 
           <!--Contact Us Section -->

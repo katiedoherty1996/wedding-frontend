@@ -3,7 +3,8 @@
         <div
             v-for="(item, index) in displayedInvitations"
             :key="index"
-            class="col-12 col-sm-6 col-md-4 col-lg-4 q-pa-md"
+            class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-md"
+            :ref="'card' + item.id"
         >
             <q-card 
                 class="cursor" 
@@ -19,7 +20,7 @@
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
-                    Price: {{ item.price }} each
+                    From {{ item.priceLowGrade && item.priceHighGrade ? formatPrice(item.priceLowGrade) : formatPrice(item.price) }} each
                 </q-card-section>
             </q-card>
         </div>
@@ -43,6 +44,9 @@
 </style>
 
 <script>
+import { usePriceFormatter } from '../hooks/usePriceFormatter';
+import { ref } from 'vue'
+
     export default {
         data() {
             return {
@@ -66,7 +70,8 @@
             },
         },
         methods: {
-             openCardDetails(cardId) {
+            openCardDetails(cardId) {
+                localStorage.setItem('clickedCardId', cardId);
                 // Use Vue Router to navigate to the card details page
                 this.$router.push({ path: '/carddetails', query: { id: cardId } });
             },
@@ -114,6 +119,13 @@
             // Remove the window resize event listener when the component is destroyed
             window.removeEventListener('resize', this.checkScreenSize);
         },
+        setup(){
+            const { formatPrice } = usePriceFormatter();
+
+            return {
+                formatPrice,
+            }
+        }
 
     }
 </script>

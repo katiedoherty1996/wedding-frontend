@@ -4,6 +4,7 @@
         :price = "price"
         :priceHighGrade = "priceHighGrade"
         :priceLowGrade = "priceLowGrade"
+        :cardPaperTypes="cardPaperTypes"
         :description = "description"
         :name = "name"
         :showSmallImages="$q.screen.lt.sm" 
@@ -13,7 +14,8 @@
 <script>
 import { api } from 'src/boot/axios';
 import CardDetails from 'src/components/CardDetails.vue';
-import { useQuasar } from 'quasar';
+import { Loading } from 'quasar';
+import { usePriceFormatter } from '../hooks/usePriceFormatter';
 
 export default {
     components: {
@@ -25,13 +27,20 @@ export default {
             price: null,
             priceHighGrade: null,
             priceLowGrade: null,
+            cardPaperTypes: null,
             description: null,
             name: null,
         }
     },
     mounted() {
-        // Make AJAX call on page load
-        this.getCardDetails();
+        Loading.show()
+
+        Promise.all([
+            this.getCardDetails(),
+            this.getCardPaperTypes(),
+        ]).finally(() => {
+            Loading.hide()
+        });
     },
     props: {
     },
@@ -39,8 +48,6 @@ export default {
     },
     methods: {
         getCardDetails(){
-            const $q = useQuasar();
-            $q.loading.show()
             var cardId = this.$route.query.id;
 
             api.get('/weddingcarddetails', {
@@ -49,24 +56,33 @@ export default {
                 }
             })
             .then(response => {
-                console.log(response.data)
-                this.products       = response.data.images;
-                this.price          = response.data.price;
-                this.priceHighGrade = response.data.priceHighGrade;
-                this.priceLowGrade  = response.data.priceLowGrade;
-                this.description    = response.data.description;
-                this.name           = response.data.cardName;
+                this.products       = !isEmpty(response.data.images) ? response.data.images : null;
+                this.price          = !isEmpty(response.data.price) ? response.data.price : null;
+                this.priceHighGrade = !isEmpty(response.data.priceHighGrade) ? response.data.priceHighGrade : null;
+                this.priceLowGrade  = !isEmpty(response.data.priceLowGrade) ? response.data.priceLowGrade : null;
+                this.description    = !isEmpty(response.data.description) ? response.data.description : null;
+                this.name           = !isEmpty(response.data.cardName) ? response.data.cardName : null;
             })
             .catch(error => {
                 console.error('Error:', error);
-            }).finally(() =>{
-                $q.loading.hide()
-            });
+            })
+        },
+        getCardPaperTypes(){
+            const { formatPrice } = usePriceFormatter();
+            api.get('/cardpapertypes')
+            .then(response => {
+                this.cardPaperTypes = response.data.map(type => {
+                    var price = !isEmpty(this[type.cardPaperVariable]) ? formatPrice(this[type.cardPaperVariable]) : '';
+                    return {
+                        cardPaperName: `${type.cardPaperName}` + ' ' +  price,
+                        cardPaperId: type.cardPaperId
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
         }
     },
-    setup () {
-        return {
-        }
-    }
 }
 </script>

@@ -94,9 +94,6 @@ export default defineComponent({
   setup () {
     return {
       model: ref(null),
-      options: [
-        'Foiled Invitations', 'Trifold Invitations', 'Folded Invitations', 'Vellum Invitations', 'Rustic Invitations', 'Flat Invitations', 'Floral Invitations'
-      ]
     }
   }
 })
