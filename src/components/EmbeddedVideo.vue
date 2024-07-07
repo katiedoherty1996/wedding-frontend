@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-6 col-lg-6 col-sm-12 flex items-center mobile-hide">
       <div class="f-20 quattrocento mobile-hide">
-        We are a small family run business who supply elegant and affordable wedding stationary.
+        We are a small family run business who supply elegant and affordable wedding stationery.
         We pride ourselves on providing high-quality wedding invitations at affordable prices.
       </div>
     </div>

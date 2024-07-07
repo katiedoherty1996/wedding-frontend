@@ -15,6 +15,21 @@ const routes = [
       {
         path: '/carddetails',
         component: () => import('pages/CardDetails.vue')
+      },
+      {
+        path: '/aboutus',
+        component: () => import('pages/IndexPage.vue'),
+        meta: { scrollToAboutUs: true }
+      },
+      {
+        path: '/contactus',
+        component: () => import('pages/IndexPage.vue'),
+        meta: { scrollToContactUs: true }
+      },
+      {
+        path: '/location',
+        component: () => import('pages/IndexPage.vue'),
+        meta: { scrollToLocation: true }
       }
     ]
   },

@@ -4,7 +4,6 @@
             v-for="(item, index) in displayedInvitations"
             :key="index"
             class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-md"
-            :ref="'card' + item.id"
         >
             <q-card 
                 class="cursor" 

@@ -42,6 +42,9 @@ export default defineComponent({
     },
     computed: {
         isOpen: {
+            get(){
+              return this.show;
+            },
             set(val) {
                 this.$emit('input', val);
             },

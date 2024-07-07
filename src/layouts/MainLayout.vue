@@ -78,13 +78,13 @@ const linksList = [
     title: 'About Us',
     caption: 'Find Out More About Us',
     icon: 'info',
-    link: 'https://forum.quasar.dev'
+    link: '/#/aboutus'
   },
   {
     title: 'Contact Us',
     caption: 'Get In Touch',
     icon: 'contact_page',
-    link: '#contactUs'
+    link: '/#/contactus'
   },
 ]
 
@@ -98,8 +98,16 @@ export default defineComponent({
 
   setup () {
     const leftDrawerOpen = ref(false)
+     const aboutUsRef = ref(null);
+
+    const scrollToAboutUs = () => {
+      if (aboutUsRef.value) {
+        aboutUsRef.value.$el.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
 
     return {
+      scrollToAboutUs,
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {

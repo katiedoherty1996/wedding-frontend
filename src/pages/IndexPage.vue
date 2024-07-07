@@ -11,36 +11,49 @@
     <ComponentHeadings heading="Our Products"/>
     <RowOfImages :images="images"/>
 
-    <!--Wedding Card Album Video-->
-    <ComponentHeadings heading="Our Wedding Card Album"/>
-    <EmbeddedVideo :video="video" />
-
-    <!--About Us Form-->
-    <ComponentHeadings heading="About Us"/>
+    <!--Wedding Cards-->
+    <ComponentHeadings heading="Our Wedding Cards"/>
     <ImageAndInformation 
         image="/images/homepage-pic.jpg"
-        text="We are a small family run business who supply elegant and affordable wedding stationary.
-        We pride ourselves on providing high-quality wedding invitations at affordable prices." 
+        text="We are a family run Irish business who supply high-quality wedding stationery at affordable prices.
+        Our collection includes custom bespoke invitations, mass booklets and thank you cards.
+        We tailor all our wedding stationery to our customers needs and assist in making your dream wedding a reality." 
+        :imageLeft="false"
     />
 
     <!--Google Reviews-->
     <Reviews :reviews="reviews" />
 
+    <!--About Us Form-->
+    <div id="aboutUs">
+      <ComponentHeadings heading="About Us" ref="aboutUsRef"/>
+      <ImageAndInformation 
+          image="/images/picture-of-mam.jpg"
+          text="Meet Mary, the creative force behind Doherty Wedding Invitations!
+          Mary has been running Doherty Wedding Invitations nearly 30 years and has helped many couples create an unforgettable wedding.
+          With a passion for crafting beautiful wedding stationery, 
+          she pours her heart into every design to ensure your special day is filled with elegance and charm." 
+          :imageLeft="true"
+      />
+    </div>
+
     <!--Contact Us Form-->
-    <ComponentHeadings heading="Contact Us" id="contactUs"/>
-    <ContactForm />
+    <div id="contactUs">
+        <ComponentHeadings heading="Contact Us" ref="contactUsRef"/>
+        <ContactForm />
+    </div>
   </q-page>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref  } from 'vue'
 import HomePageHeader from '../components/HomePageHeader.vue';
 import RowOfImages from '../components/ProductsSold.vue';
 import Reviews from '../components/GoogleReviews.vue';
 import ContactForm from 'components/ContactForm.vue';
-import EmbeddedVideo from 'components/EmbeddedVideo.vue';
 import ComponentHeadings from 'components/ComponentHeadings.vue';
 import ImageAndInformation from 'components/ImageAndInformation.vue';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -49,7 +62,6 @@ export default defineComponent({
     RowOfImages,
     Reviews,
     ContactForm,
-    EmbeddedVideo,
     ComponentHeadings,
     ImageAndInformation,
   },
@@ -88,13 +100,57 @@ export default defineComponent({
                 text:'We ordered our wedding invitations from Doherty Wedding Invitations a couple of weeks ago. We are delighted with the invitations. They are lovely, of a really high quality and the price was fantastic. We would highly recommend Doherty Wedding Invitations. Great service and great product.',
             },
         ],
-        video: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdohertyweddinginvitations%2Fvideos%2F204838903921570%2F&show_text=false&width=560&t=0"
+        video: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdohertyweddinginvitations%2Fvideos%2F204838903921570%2F&show_text=false&width=560&t=0",
+        showLoader: false,
     }
   },
-  setup () {
+  mounted(){
+      // this.pageLinkScrolls();
+      // const route = useRoute();
+      // this.$watch(() => route.path, (newPath) => {
+      //     this.pageLinkScrolls();
+      // });
+  },
+  onMounted(){
+      
+  },
+  methods: {
+      scrollTo(ref) {
+          // Use JavaScript to scroll to the About Us section/component
+          if (this.$refs[ref]) {
+            this.$refs[ref].$el.scrollIntoView({
+                behavior: 'auto',
+                block: 'start',
+                inline: 'nearest'
+            });
+          }
+      },
+      pageLinkScrolls(){
+          if (this.$route.meta.scrollToAboutUs) {
+            setTimeout(() => {
+              this.scrollTo('aboutUsRef');
+              this.showLoader = false;
+            }, 500)
+          } else if (this.$route.meta.scrollToContactUs){
+              setTimeout(() => {
+                  this.scrollTo('contactUsRef');
+                  this.showLoader = false;
+              }, 500)
+          } else if (this.$route.meta.scrollToLocation){
+              setTimeout(() => {
+                  this.scrollTo('locationRef');
+                  this.showLoader = false;
+              }, 500)
+          }
+      }
+  },
+  watch: {
+  },
+  setup() {
     return {
-      model: ref(null),
-    }
+        // aboutUsRef,
+        model: ref(null),
+    };
   }
 })
 </script>

@@ -1,15 +1,6 @@
 <template>
     <q-footer elevated class="footer-background text-white q-pa-lg">
         <div class="row footer-content mdi-align-horizontal-center">
-
-          <!--Contact Us Section -->
-            <!-- <div class="col-xs-12 col-sm-3 col-md-3">
-                <h6 class="text-h6">Contact Us</h6>
-                <p>
-                  We are a small family run business who supply elegant and affordable wedding stationary.
-                </p>
-                
-            </div> -->
             <div class="col-xs-12 col-sm-3 col-md-3">
               <h6 class="text-h6">Contact Us</h6>
                 <div>
@@ -29,11 +20,14 @@
              <!-- Location Section -->
             <div class="col-xs-12 col-sm-3">
                 <h6 class="text-h6">Location</h6>
+                <GoogleMap 
+                    address="5 Saint Johns Terrace, Hospital, Co. Limerick"
+                />
             </div>
 
             <!--Wedding Stationery -->
             <div class="col-xs-12 col-sm-3">
-                <h6 class="text-h6">Wedding Stationary</h6>
+                <h6 class="text-h6">Wedding Stationery</h6>
                 <q-list dense>
                     <q-item clickable v-ripple>
                         <q-item-section>Wedding Invitations</q-item-section>
@@ -62,11 +56,13 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import GoogleMap from 'components/GoogleMap.vue'; 
 
-export default defineComponent({
-    name: 'FooterComponent',
-});
+export default {
+  components: {
+    GoogleMap
+  }
+};
 </script>
 
 <style scoped>
