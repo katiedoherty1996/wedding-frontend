@@ -1,55 +1,60 @@
 <template>
-    <q-footer elevated class="footer-background text-white q-pa-lg">
-        <div class="row footer-content mdi-align-horizontal-center">
-            <div class="col-xs-12 col-sm-3 col-md-3">
-              <h6 class="text-h6">Contact Us</h6>
-                <div>
-                    <span label="Name">Name: </span>
-                    <span>Mary Doherty</span>
-                </div>
-                <div>
-                    <span label="Name">LandLine: </span>
-                    <span>061-383436</span>
-                </div>
-                <div>
-                    <span label="Name">Mobile: </span>
-                    <span>0857767603</span>
-                </div>
-            </div>
-
-             <!-- Location Section -->
-            <div class="col-xs-12 col-sm-3">
-                <h6 class="text-h6">Location</h6>
+    <q-footer elevated class="footer-background text-white q-pl-xl q-pr-xl q-pt-md q-pb-lg">
+        <div class="row footer-content">
+            <!-- Location Section -->
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 q-pb-lg q-pr-sm" id="location">
+                <h5><b>Location</b></h5>
                 <GoogleMap 
                     address="5 Saint Johns Terrace, Hospital, Co. Limerick"
                 />
             </div>
 
-            <!--Wedding Stationery -->
-            <div class="col-xs-12 col-sm-3">
-                <h6 class="text-h6">Wedding Stationery</h6>
-                <q-list dense>
-                    <q-item clickable v-ripple>
-                        <q-item-section>Wedding Invitations</q-item-section>
-                    </q-item>
-                    <q-item clickable v-ripple>
-                        <q-item-section>Ceremony Booklets</q-item-section>
-                    </q-item>
-                    <q-item clickable v-ripple>
-                        <q-item-section>Thank You Cards</q-item-section>
-                    </q-item>
-                </q-list>
+            <div class="quattrocento col-xs-12 col-sm-6 col-md-3 q-pb-lg">
+                <h5 class="quattrocento"><b>Address</b></h5>
+                <span class="text-subtitle1">Main Street, <br/>
+                Hospital, <br/>
+                Co. Limerick <br/>
+                V35 NH74</span>
             </div>
-
-            <!-- Follow Us Section -->
-            <div class="col-xs-12 col-sm-3">
-                <div class="flex items-center">
-                  <h6 class="col-6">Follow Us: </h6>
+            
+            <div class="col-xs-12 col-sm-6 col-md-3 col-12">
+              <h5 class="quattrocento"><b>Contact Us</b></h5>
+                <div class="q-mt-sm quattrocento text-subtitle1">
+                    <span label="Name">Name: </span>
+                    <span>Mary Doherty</span>
+                </div>
+                <div class="q-mt-sm quattrocento text-subtitle1">
+                    <span label="LandLine">LandLine: </span>
+                    <span>(061) 383436</span>
+                </div>
+                <div class="q-mt-sm quattrocento text-subtitle1">
+                    <span label="Mobile">Mobile: </span>
+                    <span>0857767603</span>
+                </div>
+                <!-- Follow Us Section -->
+                <div class="quattrocento text-subtitle1">
+                  <span label="Follow Us">Follow Us: </span>
                   <q-btn-group>
                       <q-btn icon="facebook" color="white" flat round />
                       <q-btn icon="camera" color="white" flat round />
                   </q-btn-group>
                 </div>
+            </div>
+
+            <!--Wedding Stationery -->
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-12 q-pb-lg">
+                <h5><b>Wedding Stationery</b></h5>
+                <q-list dense>
+                    <q-item class="text-subtitle1" clickable v-ripple>
+                        <q-item-section>Wedding Invitations</q-item-section>
+                    </q-item>
+                    <q-item class="text-subtitle1" clickable v-ripple>
+                        <q-item-section>Ceremony Booklets</q-item-section>
+                    </q-item>
+                    <q-item class="text-subtitle1" clickable v-ripple>
+                        <q-item-section>Thank You Cards</q-item-section>
+                    </q-item>
+                </q-list>
             </div>
         </div>
     </q-footer>
@@ -75,7 +80,6 @@ export default {
   background-size: cover;
   background-position: center;
   overflow: hidden;
-  height: 450px;
 }
 
 .footer-background::before {

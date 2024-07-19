@@ -12,6 +12,7 @@
                         :clear-filters= "clearFiltersClicked"
                         label="Filter Price"
                         @categorySelected="onPriceCategorySelected"
+                        :selectedValue="selectedCategoryPrice"
                     />
                 </div>
               </div>
@@ -24,6 +25,7 @@
                             :options="cardCategories"
                             label="Filter Cards"
                             @categorySelected="onCardCategorySelected"
+                            :selectedValue="selectedCategoryCard"
                         />
                     </div>
                     <!--section for clear filters button-->
@@ -36,14 +38,14 @@
         <GalleryCard 
             :products="filteredInvitations" 
             :currentPage="currentPage"
+            :selectedCategory="selectedCategoryCard"
+            :selectedPrice="selectedCategoryPrice"
         />
         <PaginationNumbers 
-            v-if="!isMobileDevice"
             :products="filteredInvitations"  
             :currentPage="currentPage"
             :numberOfPages="numberOfPages"
             @page-changed="handlePageChanged"
-            class="absolute-bottom top-100"
         />
     </q-page>
 </template>
@@ -88,40 +90,41 @@ export default defineComponent({
     },
     mounted() {
         // Make AJAX call on page load
-        Loading.show()
+        try{
+            Loading.show();
+            var pageNo = +localStorage.getItem('pageNo');
+            localStorage.removeItem('pageNo');
+            this.currentPage = isEmpty(pageNo) ? 1 : pageNo;
 
-        Promise.all([
-            this.getWeddingInvitations(),
-            this.getInvitationsCategories()
-        ]).then(() => {
-            // var savedCardId = localStorage.getItem('clickedCardId');
-            // if (!isEmpty(savedCardId)) {
-            //    this.$nextTick(() => {
-            //       const cardElement = this.$refs[`card-${savedCardId}`];
-            //       console.log('cardElement', cardElement)
-            //       if (!isEmpty(cardElement)) {
-            //         cardElement.scrollIntoView({ behavior: 'smooth' });
-            //       }
-            //       // Clear the stored card ID from local storage after scrolling
-            //       localStorage.removeItem('clickedCardId');
-            //     });
-            // }
-        }).finally(() => {
-          var savedCardId = localStorage.getItem('clickedCardId');
-          console.log(savedCardId)
-            if (!isEmpty(savedCardId)) {
-               this.$nextTick(() => {
-                  var cardElement = this.$refs['card-' + savedCardId];
-                  console.log(this.$refs)
-                  if (!isEmpty(cardElement)) {
-                    cardElement.scrollIntoView({ behavior: 'smooth' });
-                  }
-                  // Clear the stored card ID from local storage after scrolling
-                  localStorage.removeItem('clickedCardId');
-                });
-            }
+            /**
+             * make an api call to get the wedding invitation categories
+             * If there were filters applied before the user clicked on a card
+             * then apply those filters again
+             */
+            Promise.all([
+                this.getWeddingInvitations(),
+                this.getInvitationsCategories()
+            ]).then(() => {
+                //get the selected category and price
+                var selectedCategory = localStorage.getItem('selectedCategory');
+                var selectedPrice = localStorage.getItem('selectedPrice');
+
+                //remove the selected category and price from local storage
+                localStorage.removeItem('selectedCategory');
+                localStorage.removeItem('selectedPrice');
+
+                //set the the selected category and price if there is one stored in the cache
+                this.selectedCategoryCard = !isEmpty(selectedCategory) ? JSON.parse(selectedCategory) : null;
+                this.selectedCategoryPrice = !isEmpty(selectedPrice) ? JSON.parse(selectedPrice) : null;
+            });
+
+        } catch(error){
+            console.error('Error:', error);
+        } finally {
+            this.scrollToCard();
             Loading.hide()
-        });
+        }
+        
     },
     watch: {
         selectedCategoryCard(){
@@ -175,64 +178,85 @@ export default defineComponent({
       
     },
     methods: {
-      onCardCategorySelected(categoryId) {
-          this.selectedCategoryCard = categoryId;
-      },
+        /**
+         * set the selected category id
+         */
+        onCardCategorySelected(categoryId) {
+            this.selectedCategoryCard = categoryId;
+        },
 
-      onPriceCategorySelected(categoryId) {
-          this.selectedCategoryPrice = categoryId;
-          this.clearFiltersClicked = false;
-      },
+        /**
+         * set the selected price id from price dropdown
+         */
+        onPriceCategorySelected(categoryId) {
+            this.selectedCategoryPrice = categoryId;
+            this.clearFiltersClicked = false;
+        },
 
-      handlePageChanged(newPageNumber) {
-          this.currentPage = newPageNumber;
-          this.clearFiltersClicked = false;
-      },
+        /**
+         * set page No
+         */
+        handlePageChanged(newPageNumber) {
+            this.currentPage = newPageNumber;
+            this.clearFiltersClicked = false;
+        },
 
-      organizeByPrice(products, ascending = true) {
-        // Clone the array to avoid modifying the original array
-        const sortedProducts = [...products];
+        /**
+         * organise the gallery by price
+         */
+        organizeByPrice(products, ascending = true) {
+            // Clone the array to avoid modifying the original array
+            const sortedProducts = [...products];
 
-        // Sort the cloned array based on the 'price' property
-        sortedProducts.sort((a, b) => {
-          const priceA = !isEmpty(a.priceLowGrade) ? a.priceLowGrade : a.price;
-          const priceB = !isEmpty(b.priceLowGrade) ? b.priceLowGrade : b.price;
+            // Sort the cloned array based on the 'price' property
+            sortedProducts.sort((a, b) => {
+                const priceA = !isEmpty(a.priceLowGrade) ? a.priceLowGrade : a.price;
+                const priceB = !isEmpty(b.priceLowGrade) ? b.priceLowGrade : b.price;
 
-          if (ascending) {
-            return priceA - priceB; // Sort from lowest to highest
-          } else {
-            return priceB - priceA; // Sort from highest to lowest
-          }
-        });
+                if (ascending) {
+                    return priceA - priceB; // Sort from lowest to highest
+                } else {
+                    return priceB - priceA; // Sort from highest to lowest
+                }
+            });
 
-        return sortedProducts;
-      },
+            return sortedProducts;
+        },
 
-      clearFilters(){
-        this.selectedCategoryCard = null;
-        this.selectedCategoryPrice = null;
-        this.clearFiltersClicked = true;
-      },
+        clearFilters(){
+            this.selectedCategoryCard = null;
+            this.selectedCategoryPrice = null;
+            this.clearFiltersClicked = true;
+        },
 
-      getWeddingInvitations(){
-          api.get('/weddingcards')
-          .then(response => {
-              this.invitations = response.data;
-          })
-          .catch(error => {
-              console.error('Error fetching cards:', error);
-          });
-      },
+        getWeddingInvitations(){
+            api.get('/weddingcards')
+            .then(response => {
+                this.invitations = response.data;
+            })
+            .catch(error => {
+                console.error('Error fetching cards:', error);
+            });
+        },
 
-      getInvitationsCategories(){
-          api.get('/invitationscategories')
-          .then(response => {
-              this.cardCategories = response.data;
-          })
-          .catch(error => {
-              console.error('Error fetching cards:', error);
-          });
-      },
+        getInvitationsCategories(){
+            api.get('/invitationscategories')
+            .then(response => {
+                this.cardCategories = response.data;
+            })
+            .catch(error => {
+                console.error('Error fetching cards:', error);
+            });
+        },
+
+        scrollToCard(){
+            var cardId = localStorage.getItem('clickedCardId');
+            setTimeout(() => {
+                localStorage.removeItem('clickedCardId');
+                scrollToId(cardId);
+            }, 500);
+        },
+
     },
 });
 </script>

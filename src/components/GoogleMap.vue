@@ -71,11 +71,11 @@ export default {
 <style scoped>
 .google-map {
     width: 100%;
-    height: 270px; 
+    height: 250px; 
 }
 .map-container {
     width: 100%;
-    max-width:300px;
+    max-width:280px;
     height: 100%;
 }
 </style>

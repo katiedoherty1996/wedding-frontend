@@ -8,8 +8,10 @@
     ></HomePageHeader>
 
     <!--Products being sold-->
-    <ComponentHeadings heading="Our Products"/>
-    <RowOfImages :images="images"/>
+    <div id="products">
+      <ComponentHeadings heading="Our Products"/>
+      <RowOfImages :images="images"/>
+    </div>
 
     <!--Wedding Cards-->
     <ComponentHeadings heading="Our Wedding Cards"/>
@@ -53,7 +55,6 @@ import Reviews from '../components/GoogleReviews.vue';
 import ContactForm from 'components/ContactForm.vue';
 import ComponentHeadings from 'components/ComponentHeadings.vue';
 import ImageAndInformation from 'components/ImageAndInformation.vue';
-import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -105,44 +106,11 @@ export default defineComponent({
     }
   },
   mounted(){
-      // this.pageLinkScrolls();
-      // const route = useRoute();
-      // this.$watch(() => route.path, (newPath) => {
-      //     this.pageLinkScrolls();
-      // });
   },
   onMounted(){
       
   },
   methods: {
-      scrollTo(ref) {
-          // Use JavaScript to scroll to the About Us section/component
-          if (this.$refs[ref]) {
-            this.$refs[ref].$el.scrollIntoView({
-                behavior: 'auto',
-                block: 'start',
-                inline: 'nearest'
-            });
-          }
-      },
-      pageLinkScrolls(){
-          if (this.$route.meta.scrollToAboutUs) {
-            setTimeout(() => {
-              this.scrollTo('aboutUsRef');
-              this.showLoader = false;
-            }, 500)
-          } else if (this.$route.meta.scrollToContactUs){
-              setTimeout(() => {
-                  this.scrollTo('contactUsRef');
-                  this.showLoader = false;
-              }, 500)
-          } else if (this.$route.meta.scrollToLocation){
-              setTimeout(() => {
-                  this.scrollTo('locationRef');
-                  this.showLoader = false;
-              }, 500)
-          }
-      }
   },
   watch: {
   },

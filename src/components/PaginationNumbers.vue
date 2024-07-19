@@ -24,6 +24,7 @@ export default defineComponent({
             noOfPages: 0,
         }
     },
+    emits: ['page-changed'],
     props: {
         products: Array,
         currentPage: Number,

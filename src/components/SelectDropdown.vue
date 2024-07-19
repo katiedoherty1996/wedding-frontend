@@ -26,9 +26,17 @@ export default defineComponent({
     props: {
         options: Array,
         label: String,
-        clearFilters: Boolean
+        clearFilters: Boolean,
+        selectedValue: {
+            type: Object,
+            required: false
+        },
     },
     watch: {
+        selectedValue(){
+            this.selectedCategoryId = this.selectedValue;
+            console.log('selectedValue', this.selectedCategoryId)
+        },
         clearFilters(){
             this.selectedCategoryId = null;
         },

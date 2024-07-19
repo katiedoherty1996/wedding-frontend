@@ -4,7 +4,7 @@
  * @returns boolean
  */
 function isEmpty(variable) {
-    return variable === null || variable === undefined || variable === '';
+    return variable === null || variable === undefined || variable === '' || variable === 0;
 }
 
 /**
@@ -24,4 +24,18 @@ function isIpadDevice(){
  */
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+//scrolls to an element with the passed in id
+function scrollToId(id) {
+    const cardElement = document.getElementById(id);
+    
+    // Use JavaScript to scroll to the About Us section/component
+    if (!isEmpty(cardElement)) {
+        cardElement.scrollIntoView({
+            behavior: 'auto',
+            block: 'start',
+            inline: 'nearest'
+        });
+    }
 }

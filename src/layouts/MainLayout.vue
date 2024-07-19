@@ -72,7 +72,7 @@ const linksList = [
     title: 'Location',
     caption: 'Get Directions',
     icon: 'location_on',
-    link: 'https://forum.quasar.dev'
+    link: '/#/location'
   },
   {
     title: 'About Us',

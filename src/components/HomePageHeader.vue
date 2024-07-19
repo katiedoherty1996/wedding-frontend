@@ -4,6 +4,13 @@
             <div class="flex column">
                 <div class="quattrocento q-pt-lg q-pr-sm q-pl-sm" style="font-size:60px;">{{ headerText }}</div>
                 <div class="allura q-pb-lg q-pl-sm" style="font-size:30px;">{{ subtext }}</div>
+                <q-btn 
+                    outline 
+                    style="max-width:300px;" 
+                    class="teal-custom-colour-text q-mb-lg" 
+                    label="View Our Products" 
+                    @click="scrollToProducts"
+                />
             </div>
         </div>
         <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
@@ -31,5 +38,10 @@ export default defineComponent({
           required: true,
         },
     },
+    methods: {
+        scrollToProducts(){
+            scrollToId('products');
+        }
+    }
 });
 </script>

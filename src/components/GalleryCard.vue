@@ -9,6 +9,7 @@
                 class="cursor" 
                 style="height: 100%;"
                 @click="openCardDetails(item.id)"
+                :id="item.id"
             >
                 <div class="image-container">
                     <img :src="item.image" class="card-image">
@@ -44,7 +45,6 @@
 
 <script>
 import { usePriceFormatter } from '../hooks/usePriceFormatter';
-import { ref } from 'vue'
 
     export default {
         data() {
@@ -56,21 +56,35 @@ import { ref } from 'vue'
         props: {
             products: Array,
             currentPage: Number,
-            category: Object,
+            selectedCategory: Object,
+            selectedPrice: {
+                type: Object,
+                required: false
+            }
         },
         computed:{
             displayedInvitations() {
-                if(isMobileDevice()){
-                    return this.products;
-                } else{
-                    this.addPageNoId();
-                    return this.products.filter(invitation => invitation.pageNo == this.currentPage);
-                }
+                this.addPageNoId();
+                return this.products.filter(invitation => invitation.pageNo == this.currentPage);
             },
         },
         methods: {
             openCardDetails(cardId) {
+                //set the clickedCardId
                 localStorage.setItem('clickedCardId', cardId);
+                //set the current page no
+                localStorage.setItem('pageNo', this.currentPage);
+
+                //set the selected category
+                if(!isEmpty(this.selectedCategory)){
+                    localStorage.setItem('selectedCategory', JSON.stringify(this.selectedCategory));
+                }
+
+                //set the selected price
+                if(!isEmpty(this.selectedPrice)){
+                    localStorage.setItem('selectedPrice', JSON.stringify(this.selectedPrice));
+                }
+
                 // Use Vue Router to navigate to the card details page
                 this.$router.push({ path: '/carddetails', query: { id: cardId } });
             },
@@ -85,13 +99,10 @@ import { ref } from 'vue'
             addPageNoId() {
                 let count = 0;
                 let pageNo = 1;
-                let numberOfInvitationsOnPage = isIpadDevice() ? 15 : 20
-
-                this.products.map(invitation => {
-                    invitation.pageNo = null;
-                });
+                let numberOfInvitationsOnPage = isIpadDevice() ? 15 : 20;
 
                 return this.products.map(invitation => {
+                    invitation.pageNo = null;
                     if(count <= numberOfInvitationsOnPage - 1){
                         invitation.pageNo = pageNo;
                         count++;
