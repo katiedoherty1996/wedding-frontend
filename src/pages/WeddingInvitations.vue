@@ -127,14 +127,6 @@ export default defineComponent({
         
     },
     watch: {
-        selectedCategoryCard(){
-            if(!isEmpty(this.selectedCategoryCard)){
-              this.tempPageNo = this.currentPage;
-              this.currentPage = 1;
-            } else{
-              this.currentPage = this.tempPageNo;
-            }
-        }
     },
     computed: {
       /**
@@ -226,6 +218,7 @@ export default defineComponent({
         clearFilters(){
             this.selectedCategoryCard = null;
             this.selectedCategoryPrice = null;
+            this.currentPage = 1;
             this.clearFiltersClicked = true;
         },
 
