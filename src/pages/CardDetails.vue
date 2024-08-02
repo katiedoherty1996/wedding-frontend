@@ -4,6 +4,7 @@
         :price = "price"
         :priceHighGrade = "priceHighGrade"
         :priceLowGrade = "priceLowGrade"
+        :samplePrice = "samplePrice"
         :cardPaperTypes="cardPaperTypes"
         :description = "description"
         :name = "name"
@@ -33,6 +34,7 @@ export default {
             price: null,
             priceHighGrade: null,
             priceLowGrade: null,
+            samplePrice: null,
             cardPaperTypes: null,
             description: null,
             name: null,
@@ -67,6 +69,7 @@ export default {
                 this.price          = !isEmpty(response.data.price) ? response.data.price : null;
                 this.priceHighGrade = !isEmpty(response.data.priceHighGrade) ? response.data.priceHighGrade : null;
                 this.priceLowGrade  = !isEmpty(response.data.priceLowGrade) ? response.data.priceLowGrade : null;
+                this.samplePrice    = !isEmpty(response.data.samplePrice) ? response.data.samplePrice : null;
                 this.description    = !isEmpty(response.data.description) ? response.data.description : null;
                 this.name           = !isEmpty(response.data.cardName) ? response.data.cardName : null;
             })

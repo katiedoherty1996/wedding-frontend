@@ -3,11 +3,11 @@
         <div>
             <div class="row q-pa-md">
                 <div class="col-md-6 col-lg-6 col-12">
-                <div class="row flex justify-center container">
-                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
-                    <span class="text-light-green-10 quattrocento" style="font-size:16px;">Showing {{this.filteredInvitations.length}} Cards, Page {{this.currentPage}}/{{this.numberOfPages}}</span>
+                <div class="row flex justify-between align-center">
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm text-center" style="margin:auto;" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
+                        <span class="text-light-green-10 quattrocento" style="font-size:16px;">Showing {{this.filteredInvitations.length}} Cards, Page {{this.currentPage}}/{{this.numberOfPages}}</span>
                     </div>
-                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" style="margin:auto;" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
                         <SelectDropdown 
                             :options="priceOptions"
                             :clear-filters= "clearFiltersClicked"
@@ -19,8 +19,8 @@
                 </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-12">
-                    <div class="row flex justify-center container">
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
+                    <div class="row flex justify-between align-center">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" style="margin:auto;" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
                             <SelectDropdown 
                                 :clear-filters= "clearFiltersClicked"
                                 :options="cardCategories"
@@ -30,7 +30,7 @@
                             />
                         </div>
                         <!--section for clear filters button-->
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" style="margin:auto;" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
                             <q-btn color="light-green-10 " icon="close" label="Clear All Filters" @click="clearFilters" />
                         </div>
                     </div>

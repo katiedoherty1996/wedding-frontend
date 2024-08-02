@@ -1,5 +1,34 @@
 <template>
+    <!--back button-->
+    <div v-if="userScrolled && !dismissGoBack" class="fixed q-header bg-white" style="width: 100%;">
+        <div class="col-12 flex justify-between align-center">
+            <q-btn 
+                flat 
+                icon="arrow_back" 
+                class="teal-custom-colour-text q-ma-sm q-pa-sm" 
+                label="Go Back To Gallery" 
+                @click="goBack"
+            />
+            <q-btn 
+                flat 
+                icon="close" 
+                class="teal-custom-colour-text float-right" 
+                @click="dismiss"
+            />
+        </div>
+    </div>
     <div class="q-h-100" :class="{ 'q-pa-md background-element': isDesktop }">
+        <!--back button-->
+        <div class="q-ma-sm q-pa-sm">
+            <q-btn 
+                flat 
+                icon="arrow_back" 
+                class="teal-custom-colour-text" 
+                label="Go Back To Gallery" 
+                @click="goBack"
+            />
+        </div>
+        <q-scroll-observer @scroll="onScroll" />
         <div class="row" style="max-width: 1300px; margin:auto;">
             
             <div class="col-md-6 col-lg-6 col-sm-12 col-12">
@@ -24,10 +53,16 @@
                             <div class="quattrocento text-grey q-pl-xs" style="font-size:18px;" :class="{'text-center' : isMobile}">
                                 <span v-if="priceHighGrade && priceLowGrade">
                                     Price For <b>Low Grade Paper</b>: <b>{{formatPrice(priceLowGrade)}}</b> each <br/>
-                                    Price For <b>High Grade Paper</b>: <b>{{formatPrice(priceHighGrade)}}</b> each
+                                    Price For <b>High Grade Paper</b>: <b>{{formatPrice(priceHighGrade)}}</b> each<br/>
+                                </span>
+                                <span v-else-if="price">
+                                    Price: <b>{{formatPrice(price)}}</b> each
                                 </span>
                                 <span v-else>
-                                    Price: <b>{{formatPrice(price)}}</b> each
+                                    No Price Available
+                                </span>
+                                <span v-if="samplePrice">
+                                    Price For Sample: <b>{{formatPrice(samplePrice)}}</b>
                                 </span>
                             </div>
                         </div>
@@ -71,6 +106,8 @@ export default {
     },
     data(){
         return {
+            userScrolled:false,
+            dismissGoBack: false,
         }
     },
     props: {
@@ -92,6 +129,10 @@ export default {
             required: false
         },
         priceHighGrade: {
+            type: Number,
+            required: false
+        },
+        samplePrice: {
             type: Number,
             required: false
         },
@@ -128,6 +169,18 @@ export default {
         }
     },
     methods: {
+        goBack() {
+            // Implement your go back logic here
+            this.$router.go(-1);
+        },
+        onScroll(info){
+            this.userScrolled = info.position.top > 0;
+        },
+        dismiss() {
+            // Hide the div by setting userScrolled to false
+            this.userScrolled = false;
+            this.dismissGoBack = true;
+        }
         
     },
     setup () {

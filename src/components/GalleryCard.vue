@@ -20,7 +20,7 @@
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
-                    From {{ item.priceLowGrade && item.priceHighGrade ? formatPrice(item.priceLowGrade) : formatPrice(item.price) }} each
+                    {{ displayPriceForGalleryCard(item) }}
                 </q-card-section>
             </q-card>
         </div>
@@ -117,6 +117,14 @@ import { usePriceFormatter } from '../hooks/usePriceFormatter';
                 // Set the clicked card's modal state to true
                 this.showModal[index] = true;
             },
+            displayPriceForGalleryCard(item) {
+                const { price, priceLowGrade, priceHighGrade } = item;
+                if (price || priceLowGrade || priceHighGrade) {
+                    return 'From ' + this.formatPrice(priceLowGrade && priceHighGrade ? priceLowGrade : price || priceLowGrade) + ' each';
+                }
+
+                return 'No Price Available';
+            }
         },
         mounted() {
             // Call the checkScreenSize method when the component is mounted
