@@ -23,7 +23,7 @@
                         <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 q-pa-sm" :align="isMobileDevice || isIpadDevice ? 'center' : 'left'">
                             <SelectDropdown 
                                 :clear-filters= "clearFiltersClicked"
-                                :options="cardCategories"
+                                :options="bookletCategories"
                                 label="Filter Cards"
                                 @categorySelected="onCardCategorySelected"
                                 :selectedValue="selectedCategoryCard"
@@ -66,7 +66,7 @@ import LottieLoader from 'components/LottieLoader.vue';
 import animationData from 'components/animations/DefaultLoadingAnimation.json';
 
 export default defineComponent({
-    name: 'WeddingInvitations',
+    name: 'MassBooklets',
     components: {
         GalleryCard,
         SelectDropdown,
@@ -75,12 +75,12 @@ export default defineComponent({
     },
     data(){
         return {
-            invitations: [],
+            massbooklets: [],
             selectedCategoryCard: null,
             selectedCategoryPrice: null,
             currentPage: 1,
             tempPageNo: null,
-            cardCategories: [],
+            bookletCategories: [],
             priceOptions: [
               {
                 optionName: 'Lowest To Highest',
@@ -111,8 +111,8 @@ export default defineComponent({
              * then apply those filters again
              */
             Promise.all([
-                this.getWeddingInvitations(),
-                this.getInvitationsCategories()
+                this.getMassBooklets(),
+                this.getBookletCategories()
             ]).then(() => {
                 //get the selected category and price
                 var selectedCategory = localStorage.getItem('selectedCategory');
@@ -141,7 +141,7 @@ export default defineComponent({
     },
     computed: {
       /**
-       * 1. If the category and price are selected and the price filter is set from lowest to highest then filter the invitations by category and ascending by price
+       * 1. If the category and price are selected and the price filter is set from lowest to highest then filter the massbooklets by category and ascending by price
        * 2. If the category and price are selected but the price filter is set from highest to lowest then filter and organisae the results by descending
        * 3. Filter by category only
        * 4. filter by price asc only
@@ -149,28 +149,28 @@ export default defineComponent({
        */
         filteredInvitations() {
           if (!isEmpty(this.selectedCategoryCard) && !isEmpty(this.selectedCategoryPrice) && this.selectedCategoryPrice.optionId == 1) {
-                var filteredByCardsInvitations = this.invitations.filter(invitation => invitation.categoryId === this.selectedCategoryCard.optionId);
+                var filteredByCardsInvitations = this.massbooklets.filter(invitation => invitation.categoryId === this.selectedCategoryCard.optionId);
                 var filteredByPriceInvitations = this.organizeByPrice(filteredByCardsInvitations, true);
                 return filteredByPriceInvitations;
             } else if (!isEmpty(this.selectedCategoryCard) && !isEmpty(this.selectedCategoryPrice) && this.selectedCategoryPrice.optionId == 2) {
-                var filteredByCardsInvitations = this.invitations.filter(invitation => invitation.categoryId === this.selectedCategoryCard.optionId);
+                var filteredByCardsInvitations = this.massbooklets.filter(invitation => invitation.categoryId === this.selectedCategoryCard.optionId);
                 var filteredByPriceInvitations = this.organizeByPrice(filteredByCardsInvitations, false);
                 return filteredByPriceInvitations;
             } else if (!isEmpty(this.selectedCategoryCard)) {
-                var filteredInvitations = this.invitations.filter(invitation => invitation.categoryId === this.selectedCategoryCard.optionId);
+                var filteredInvitations = this.massbooklets.filter(invitation => invitation.categoryId === this.selectedCategoryCard.optionId);
                 return filteredInvitations;
             } else if(!isEmpty(this.selectedCategoryPrice) && this.selectedCategoryPrice.optionId == 1){
-                var filteredInvitations = this.organizeByPrice(this.invitations, true);
+                var filteredInvitations = this.organizeByPrice(this.massbooklets, true);
                 return filteredInvitations;
             } else if(!isEmpty(this.selectedCategoryPrice) && this.selectedCategoryPrice.optionId == 2){
-                var filteredInvitations = this.organizeByPrice(this.invitations, false);
+                var filteredInvitations = this.organizeByPrice(this.massbooklets, false);
                 return filteredInvitations;
             } else {
-                return this.invitations;
+                return this.massbooklets;
             }
         },
         numberOfPages(){
-            var numberOfInvitations = this.invitations.length;
+            var numberOfInvitations = this.massbooklets.length;
             let divisibleNumber = isIpadDevice() ? 15 : 20
             const timesDivisibleByTen  = Math.floor(numberOfInvitations/divisibleNumber);
             const remainder = numberOfInvitations % divisibleNumber;
@@ -233,20 +233,20 @@ export default defineComponent({
             this.clearFiltersClicked = true;
         },
 
-        getWeddingInvitations(){
-            api.get('/weddingcards')
+        getMassBooklets(){
+            api.get('/massbooklets')
             .then(response => {
-                this.invitations = response.data;
+                this.massboooklets = response.data;
             })
             .catch(error => {
                 console.error('Error fetching cards:', error);
             });
         },
 
-        getInvitationsCategories(){
-            api.get('/invitationscategories')
+        getBookletCategories(){
+            api.get('/massbookletscategories')
             .then(response => {
-                this.cardCategories = response.data;
+                this.bookletCategories = response.data;
             })
             .catch(error => {
                 console.error('Error fetching cards:', error);

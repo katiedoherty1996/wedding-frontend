@@ -13,6 +13,14 @@ const routes = [
         component: () => import('pages/WeddingInvitations.vue')
       },
       {
+        path: '/massbooklets',
+        component: () => import('pages/MassBooklets.vue')
+      },
+      {
+        path: '/thankkyoucards',
+        component: () => import('pages/ThankYouCard.vue')
+      },
+      {
         path: '/carddetails',
         component: () => import('pages/CardDetails.vue')
       },
@@ -44,6 +52,32 @@ const routes = [
       {
         path: '',
         component: () => import('pages/WeddingInvitations.vue')
+      }
+    ]
+  },
+
+  {
+    path: '/massbooklets',
+
+    component: () => import('layouts/InvitationsGallery.vue'),
+
+    children: [
+      {
+        path: '',
+        component: () => import('pages/MassBooklets.vue')
+      }
+    ]
+  },
+
+  {
+    path: '/thankyoucards',
+
+    component: () => import('layouts/InvitationsGallery.vue'),
+
+    children: [
+      {
+        path: '',
+        component: () => import('pages/ThankYouCard.vue')
       }
     ]
   },

@@ -9,17 +9,23 @@
         :name = "name"
         :showSmallImages="$q.screen.lt.sm" 
     />
+    <LottieLoader 
+        :showAnimationLoader="showAnimationLoader"
+        :animationData="animationData"
+    />
 </template>
 
 <script>
 import { api } from 'src/boot/axios';
 import CardDetails from 'src/components/CardDetails.vue';
-import { Loading } from 'quasar';
 import { usePriceFormatter } from '../hooks/usePriceFormatter';
+import LottieLoader from 'components/LottieLoader.vue';
+import animationData from 'components/animations/DefaultLoadingAnimation.json';
 
 export default {
     components: {
         CardDetails,
+        LottieLoader
     },
     data(){
         return {
@@ -30,16 +36,17 @@ export default {
             cardPaperTypes: null,
             description: null,
             name: null,
+            showAnimationLoader: true,
+            animationData,
         }
     },
     mounted() {
-        Loading.show()
 
         Promise.all([
             this.getCardDetails(),
             this.getCardPaperTypes(),
         ]).finally(() => {
-            Loading.hide()
+            this.showAnimationLoader = false;
         });
     },
     props: {

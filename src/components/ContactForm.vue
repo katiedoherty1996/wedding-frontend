@@ -43,6 +43,11 @@
             :error-message="errors.message"
         />
 
+        <LottieLoader 
+            :showAnimationLoader="showAnimationLoader"
+            :animationData="animationData"
+        />
+
       <div>
         <q-btn label="Submit" type="submit" class="pine white" />
         <QuasarDialog 
@@ -58,14 +63,16 @@
 
 <script>
 import { defineComponent } from 'vue'; 
-import { Loading } from 'quasar';
 import QuasarDialog from 'components/QuasarDialog.vue';
 import { api } from 'src/boot/axios';
+import LottieLoader from 'components/LottieLoader.vue';
+import animationData from 'components/animations/SendingMailAnimation.json';
 
 export default defineComponent({
     name: "ContactForm",
     components: {
-      QuasarDialog
+      QuasarDialog,
+      LottieLoader
     },
     data(){
       return{
@@ -76,6 +83,8 @@ export default defineComponent({
         errors: {},
         isDialogOpen: false,
         sent: false,
+        showAnimationLoader:false,
+        animationData
       }
     },
     props: {
@@ -110,7 +119,7 @@ export default defineComponent({
         },
         onSubmit(){
             if(this.validateForm()){
-                Loading.show()
+              this.showAnimationLoader = true;
                 api.post('/sendenquiry', {
                     name: this.name,
                     phoneNumber: this.mobile,
@@ -124,7 +133,7 @@ export default defineComponent({
                     this.sent = false;
                     console.error('Error:', error);
                 }).finally(() =>{
-                    Loading.hide()
+                    this.showAnimationLoader = false;
                     this.isDialogOpen = true;
 
                     if(this.sent){

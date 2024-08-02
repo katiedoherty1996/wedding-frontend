@@ -65,6 +65,11 @@
                 :error-message="errors.message"
             />
 
+            <LottieLoader 
+                :showAnimationLoader="showAnimationLoader"
+                :animationData="animationData"
+            />
+
             <div class="q-pt-md">
                 <q-btn class="pine white" icon-right="mail" label="Submit" @click="onSubmit" />
                 <QuasarDialog 
@@ -92,14 +97,16 @@ input[type="number"]::-webkit-inner-spin-button {
 
 <script>
 import { defineComponent } from 'vue'; 
-import { Loading } from 'quasar';
 import { api } from 'src/boot/axios';
 import QuasarDialog from 'components/QuasarDialog.vue';
 import { Platform } from 'quasar';
+import LottieLoader from 'components/LottieLoader.vue';
+import animationData from 'components/animations/SendingMailAnimation.json';
 
 export default defineComponent({
     components: {
-        QuasarDialog
+        QuasarDialog,
+        LottieLoader
     },
     data(){
         return {
@@ -112,6 +119,8 @@ export default defineComponent({
             selectedCardPaperTypeId: null,
             isDialogOpen: false,
             sent: false,
+            showAnimationLoader:false,
+            animationData
         }
     },
     props: {
@@ -165,7 +174,7 @@ export default defineComponent({
             
             var cardId = this.$route.query.id;
             if(this.validateForm()){
-                Loading.show()
+                this.showAnimationLoader = true;
                 api.post('/sendenquiry', {
                     cardId: cardId,
                     name: this.name,
@@ -181,7 +190,7 @@ export default defineComponent({
                     this.sent = false;
                     console.error('Error:', error);
                 }).finally(() =>{
-                    Loading.hide()
+                    this.showAnimationLoader = false;
                     this.isDialogOpen = true;
 
                     if(this.sent){

@@ -1,5 +1,9 @@
 <template>
-    <div ref="lottieContainer" class="lottie-animation"></div>
+    <div 
+        ref="lottieContainer" 
+        class="lottie-animation"
+        :style="{ height: containerHeight, width: containerWidth }"
+    ></div>
 </template>
 
 <script>
@@ -18,46 +22,35 @@ export default {
         },
         autoplay: {
             type: Boolean,
-            default: false
+            default: true // Set autoplay to true to start the animation on mount
         },
-        progress: {
-            type: Number,
-            default: 0
+        containerWidth: {
+            type: String,
+            default: "300px"
+        },
+        containerHeight: {
+            type: String,
+            default: "300px"
         }
-  },
-  watch: {
-    progress(newValue) {
-        this.setAnimationProgress(newValue);
-    }
-  },
-  mounted() {
-        this.loadAnimation();
-  },
-  methods: {
-    loadAnimation() {
-        this.animation = lottie.loadAnimation({
-            container: this.$refs.lottieContainer,
-            renderer: 'svg',
-            loop: this.loop,
-            autoplay: this.autoplay,
-            animationData: this.animationData
-        });
-
-        this.setAnimationProgress(this.progress);
     },
-    setAnimationProgress(progress) {
-        if (this.animation) {
-            const frame = this.animation.totalFrames * progress;
-            this.animation.goToAndStop(frame, true);
-        }
+    watch: {
+    },
+    mounted() {
+        this.loadAnimation();
+    },
+    methods: {
+        loadAnimation() {
+            this.animation = lottie.loadAnimation({
+                container: this.$refs.lottieContainer,
+                renderer: 'svg',
+                loop: true,
+                autoplay: this.autoplay,
+                animationData: this.animationData
+            });
+        },
     }
-  }
 };
 </script>
 
 <style scoped>
-.lottie-animation {
-  width: 100%;
-  height: 100%;
-}
 </style>
