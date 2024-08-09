@@ -11,15 +11,18 @@ const routes = [
       },
       {
         path: '/weddinginvitations',
-        component: () => import('pages/WeddingInvitations.vue')
+        component: () => import('src/pages/ProductGallery.vue'),
+        props: { productTypeVariable: 'weddingCards' }
       },
       {
         path: '/massbooklets',
-        component: () => import('pages/MassBooklets.vue')
+        component: () => import('src/pages/ProductGallery.vue'),
+        props: { productTypeVariable: 'massBooklets' }
       },
       {
-        path: '/thankkyoucards',
-        component: () => import('pages/ThankYouCard.vue')
+        path: '/thankyoucards',
+        component: () => import('src/pages/ProductGallery.vue'),
+        props: { productTypeVariable: 'thankYouCards' }
       },
       {
         path: '/productdetails',
@@ -39,63 +42,6 @@ const routes = [
         path: '/location',
         component: () => import('pages/IndexPage.vue'),
         meta: { scrollToLocation: true }
-      }
-    ]
-  },
-
-  // /wedding-invitations
-  {
-    path: '/weddinginvitations',
-
-    component: () => import('layouts/InvitationsGallery.vue'),
-
-    children: [
-      {
-        path: '',
-        component: () => import('pages/WeddingInvitations.vue'),
-        props: route => ({ productTypeVariable: 'weddingCards' })
-      }
-    ]
-  },
-
-  {
-    path: '/massbooklets',
-
-    component: () => import('layouts/InvitationsGallery.vue'),
-
-    children: [
-      {
-        path: '',
-        component: () => import('pages/MassBooklets.vue'),
-        props: { productTypeVariable: 'massBooklets' }
-      }
-    ]
-  },
-
-  {
-    path: '/thankyoucards',
-
-    component: () => import('layouts/InvitationsGallery.vue'),
-
-    children: [
-      {
-        path: '',
-        component: () => import('pages/ThankYouCard.vue'),
-        props: { productTypeVariable: 'thankYouCards' }
-      }
-    ]
-  },
-
-  // card details
-  {
-    path: '/productdetails',
-
-    component: () => import('layouts/InvitationDetails.vue'),
-
-    children: [
-      {
-        path: '',
-        component: () => import('pages/ProductDetails.vue')
       }
     ]
   },

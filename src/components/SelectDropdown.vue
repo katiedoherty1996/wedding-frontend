@@ -35,7 +35,6 @@ export default defineComponent({
     watch: {
         selectedValue(){
             this.selectedCategoryId = this.selectedValue;
-            console.log('selectedValue', this.selectedCategoryId)
         },
         clearFilters(){
             this.selectedCategoryId = null;

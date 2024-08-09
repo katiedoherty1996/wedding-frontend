@@ -53,6 +53,12 @@
             :showAnimationLoader="showAnimationLoader"
             :animationData="animationData"
         />
+
+        <QuasarDialog 
+            :success="success"
+            :message="errorMessage"
+            v-model="success" 
+        />
     </q-page>
 </template>
 
@@ -63,15 +69,17 @@ import SelectDropdown from 'components/SelectDropdown.vue'
 import PaginationNumbers from 'components/PaginationNumbers.vue'
 import { api } from 'src/boot/axios';
 import LottieLoader from 'components/LottieLoader.vue';
+import QuasarDialog from 'components/QuasarDialog.vue';
 import animationData from 'components/animations/DefaultLoadingAnimation.json';
 
 export default defineComponent({
-    name: 'WeddingInvitations',
+    name: 'ProductGallery',
     components: {
         GalleryCard,
         SelectDropdown,
         PaginationNumbers,
         LottieLoader,
+        QuasarDialog
     },
     data(){
         return {
@@ -96,6 +104,8 @@ export default defineComponent({
             clearFiltersClicked: false,
             animationData,
             showAnimationLoader: true,
+            success:true,
+            errorMessage : null,
         }
     },
     mounted() {
@@ -104,15 +114,14 @@ export default defineComponent({
             var pageNo = +localStorage.getItem('pageNo');
             localStorage.removeItem('pageNo');
             this.currentPage = isEmpty(pageNo) ? 1 : pageNo;
-
             /**
              * make an api call to get the wedding invitation categories
              * If there were filters applied before the user clicked on a card
              * then apply those filters again
              */
             Promise.all([
-                this.getWeddingInvitations(),
-                this.getInvitationsCategories()
+                this.getProducts(),
+                this.getCategories()
             ]).then(() => {
                 //get the selected category and price
                 var selectedCategory = localStorage.getItem('selectedCategory');
@@ -144,6 +153,11 @@ export default defineComponent({
         }
     },
     watch: {
+        productTypeVariable(newVal, oldVal) {
+            if (newVal !== oldVal) {
+                window.location.reload();
+            }
+        }
     },
     computed: {
       /**
@@ -239,8 +253,7 @@ export default defineComponent({
             this.clearFiltersClicked = true;
         },
 
-        getWeddingInvitations(){
-            console.log('variable', this.productTypeVariable);
+        getProducts(){
             api.get('/products' , {
                 params: {
                     productTypeVariable: this.productTypeVariable
@@ -250,11 +263,18 @@ export default defineComponent({
                 this.invitations = response.data;
             })
             .catch(error => {
+
+                //get rid of loader
+                this.showAnimationLoader = false;
+
+                // Handle the error here
+                this.success = false;
+                this.errorMessage = !isEmpty(error.response.data) && !isEmpty(error.response.data.message) ? error.response.data.message : "An unexpected error has occured";
                 console.error('Error fetching cards:', error);
             });
         },
 
-        getInvitationsCategories(){
+        getCategories(){
             api.get('/invitationscategories')
             .then(response => {
                 this.cardCategories = response.data;

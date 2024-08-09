@@ -51,7 +51,8 @@
       <div>
         <q-btn label="Submit" type="submit" class="pine white" />
         <QuasarDialog 
-            :sent="sent"
+            :success="success"
+            :message="successMessage"
             v-model="isDialogOpen" 
         />
         <q-btn label="Reset" type="reset" class="q-ml-sm teal-custom-colour-text" flat @click="onReset" />
@@ -82,7 +83,8 @@ export default defineComponent({
         mobile: '',
         errors: {},
         isDialogOpen: false,
-        sent: false,
+        success: false,
+        successMessage,
         showAnimationLoader:false,
         animationData
       }
@@ -127,16 +129,18 @@ export default defineComponent({
                     customerMessage: this.message
                 })
                 .then(response => {
-                    this.sent = true;
+                    this.success = response.data.sent;
+                    this.successMessage = response.data.message;
                 })
                 .catch(error => {
-                    this.sent = false;
+                    this.success = error.response.data.sent;
+                    this.successMessage = error.response.data.message;
                     console.error('Error:', error);
                 }).finally(() =>{
                     this.showAnimationLoader = false;
                     this.isDialogOpen = true;
 
-                    if(this.sent){
+                    if(this.success){
                         this.onReset();
                     }
                 });

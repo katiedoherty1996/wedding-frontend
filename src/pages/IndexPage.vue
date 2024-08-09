@@ -82,12 +82,12 @@ export default defineComponent({
           {
             image:'/images/massbooklets.jpg',
             imageText: 'Mass Booklets',
-            url: '/#/weddinginvitations'
+            url: '/#/massbooklets'
           },
           {
             image:'/images/thankyoucards.jpg',
             imageText: 'Thank You Cards',
-            url: '/#/weddinginvitations'
+            url: '/#/thankyoucards'
           },
         ],
         reviews: [

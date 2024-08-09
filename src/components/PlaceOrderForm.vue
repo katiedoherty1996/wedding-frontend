@@ -73,7 +73,8 @@
             <div class="q-pt-md">
                 <q-btn class="pine white" icon-right="mail" label="Submit" @click="onSubmit" />
                 <QuasarDialog 
-                    :sent="sent"
+                    :success="success"
+                    :message="successMessage"
                     v-model="isDialogOpen" 
                 />
                 <q-btn label="Reset" type="reset" flat class="q-ml-sm teal-custom-colour-text" @click="onReset" />
@@ -118,7 +119,8 @@ export default defineComponent({
             errors: {},
             selectedCardPaperTypeId: null,
             isDialogOpen: false,
-            sent: false,
+            success: false,
+            successMessage: null,
             showAnimationLoader:false,
             animationData
         }
@@ -184,16 +186,18 @@ export default defineComponent({
                     customerMessage: this.message
                 })
                 .then(response => {
-                    this.sent = true;
+                    this.success = response.data.sent;
+                    this.successMessage = response.data.message;
                 })
                 .catch(error => {
-                    this.sent = false;
+                    this.success = error.response.data.sent;
+                    this.successMessage = error.response.data.message;
                     console.error('Error:', error);
                 }).finally(() =>{
                     this.showAnimationLoader = false;
                     this.isDialogOpen = true;
 
-                    if(this.sent){
+                    if(this.success){
                         this.onReset();
                     }
                 });
