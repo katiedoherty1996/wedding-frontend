@@ -1,5 +1,5 @@
 <template>
-    <CardDetails 
+    <ProductDetails 
         :products = "products" 
         :price = "price"
         :priceHighGrade = "priceHighGrade"
@@ -18,14 +18,14 @@
 
 <script>
 import { api } from 'src/boot/axios';
-import CardDetails from 'src/components/CardDetails.vue';
+import ProductDetails from 'src/components/ProductDetails.vue';
 import { usePriceFormatter } from '../hooks/usePriceFormatter';
 import LottieLoader from 'components/LottieLoader.vue';
 import animationData from 'components/animations/DefaultLoadingAnimation.json';
 
 export default {
     components: {
-        CardDetails,
+        ProductDetails,
         LottieLoader
     },
     data(){

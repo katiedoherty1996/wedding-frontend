@@ -1,3 +1,4 @@
+import { route } from 'quasar/wrappers'
 
 const routes = [
   {
@@ -21,8 +22,8 @@ const routes = [
         component: () => import('pages/ThankYouCard.vue')
       },
       {
-        path: '/carddetails',
-        component: () => import('pages/CardDetails.vue')
+        path: '/productdetails',
+        component: () => import('pages/ProductDetails.vue')
       },
       {
         path: '/aboutus',
@@ -51,7 +52,8 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('pages/WeddingInvitations.vue')
+        component: () => import('pages/WeddingInvitations.vue'),
+        props: route => ({ productTypeVariable: 'weddingCards' })
       }
     ]
   },
@@ -64,7 +66,8 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('pages/MassBooklets.vue')
+        component: () => import('pages/MassBooklets.vue'),
+        props: { productTypeVariable: 'massBooklets' }
       }
     ]
   },
@@ -77,21 +80,22 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('pages/ThankYouCard.vue')
+        component: () => import('pages/ThankYouCard.vue'),
+        props: { productTypeVariable: 'thankYouCards' }
       }
     ]
   },
 
   // card details
   {
-    path: '/carddetails',
+    path: '/productdetails',
 
     component: () => import('layouts/InvitationDetails.vue'),
 
     children: [
       {
         path: '',
-        component: () => import('pages/CardDetails.vue')
+        component: () => import('pages/ProductDetails.vue')
       }
     ]
   },

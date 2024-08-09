@@ -8,7 +8,7 @@
             <q-card 
                 class="cursor" 
                 style="height: 100%;"
-                @click="openCardDetails(item.id)"
+                @click="openProductDetails(item.id)"
                 :id="item.id"
             >
                 <div class="image-container">
@@ -69,9 +69,9 @@ import { usePriceFormatter } from '../hooks/usePriceFormatter';
             },
         },
         methods: {
-            openCardDetails(cardId) {
-                //set the clickedCardId
-                localStorage.setItem('clickedCardId', cardId);
+            openProductDetails(productId) {
+                //set the clickedProductId
+                localStorage.setItem('clickedProductId', productId);
                 //set the current page no
                 localStorage.setItem('pageNo', this.currentPage);
 
@@ -86,7 +86,7 @@ import { usePriceFormatter } from '../hooks/usePriceFormatter';
                 }
 
                 // Use Vue Router to navigate to the card details page
-                this.$router.push({ path: '/carddetails', query: { id: cardId } });
+                this.$router.push({ path: '/productdetails', query: { id: productId } });
             },
             handleResize() {
                 // Update the screenSize data property based on the window width

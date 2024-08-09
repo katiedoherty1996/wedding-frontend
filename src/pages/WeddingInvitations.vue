@@ -130,12 +130,18 @@ export default defineComponent({
         } catch(error){
             console.error('Error:', error);
         } finally {
-            this.scrollToCard();
+            this.scrollToProduct();
             setTimeout(() => {
                 this.showAnimationLoader = false;
             }, 2000);
         }
         
+    },
+    props: {
+        productTypeVariable: {
+            type: String,
+            required: true
+        }
     },
     watch: {
     },
@@ -234,7 +240,12 @@ export default defineComponent({
         },
 
         getWeddingInvitations(){
-            api.get('/weddingcards')
+            console.log('variable', this.productTypeVariable);
+            api.get('/products' , {
+                params: {
+                    productTypeVariable: this.productTypeVariable
+                }
+            })
             .then(response => {
                 this.invitations = response.data;
             })
@@ -253,10 +264,10 @@ export default defineComponent({
             });
         },
 
-        scrollToCard(){
-            var cardId = localStorage.getItem('clickedCardId');
+        scrollToProduct(){
+            var cardId = localStorage.getItem('clickedProductId');
             setTimeout(() => {
-                localStorage.removeItem('clickedCardId');
+                localStorage.removeItem('clickedProductId');
                 scrollToId(cardId);
             }, 500);
         },

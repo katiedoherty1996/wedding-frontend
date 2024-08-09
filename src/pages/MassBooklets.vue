@@ -254,9 +254,9 @@ export default defineComponent({
         },
 
         scrollToCard(){
-            var cardId = localStorage.getItem('clickedCardId');
+            var cardId = localStorage.getItem('clickedProductId');
             setTimeout(() => {
-                localStorage.removeItem('clickedCardId');
+                localStorage.removeItem('clickedProductId');
                 scrollToId(cardId);
             }, 500);
         },

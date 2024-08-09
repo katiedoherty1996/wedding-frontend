@@ -1,16 +1,28 @@
 <template>
   <div class="q-pa-lg flex flex-center p- fixed-pagination">
     <q-pagination
-      v-model="pagination.page"
-      :max="numberOfPages"
-      :max-pages="6"
-      round
-      outline
-      color="light-green-10"
-      @click="updatePage"
-      direction-links
+        v-model="pagination.page"
+        :max="numberOfPages"
+        :max-pages="6"
+        round
+        outline
+        color="light-green-10"
+        @click="updatePage"
+        direction-links
     />
   </div>
+    <div class="q-pa-lg flex flex-center p- ">
+        <q-pagination
+            v-model="pagination.page"
+            :max="numberOfPages"
+            :max-pages="6"
+            round
+            outline
+            color="light-green-10"
+            @click="updatePage"
+            direction-links
+        />
+    </div>
   <div style="margin-bottom: 30px"></div>
 </template>
 
